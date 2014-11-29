@@ -599,7 +599,6 @@ button.negative:active{
 
 #planning #text .planningContainer
 {
-  margin-top: -20px;
   background-color: #EBEBEB;
   border-radius: 4px 4px 4px 4px;
   padding: 0;
@@ -632,6 +631,11 @@ button.negative:active{
 #planning #text .planningTable tbody tr:nth-child(2n+1) td
 {
   background: none repeat scroll 0 0 #FDFDFD;
+}
+
+#planning #text .planningTable td.special
+{
+  background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(155, 155, 155, 0.118039) 5px, rgba(155, 155, 155, 0.118039) 10px) !important;
 }
 
 #planning #text .planningTable .btnAction
