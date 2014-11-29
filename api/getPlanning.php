@@ -6,40 +6,13 @@ header('content-type:text/html;charset=ISO-8859-15');
 require '../class/Database.class.php';
 
 if (isset($_SESSION['idUser'])){
-  function MoisFrancais($pMois)
-  {
-    $aMois = array(
-      "Janvier",
-      "Fevrier",
-      "Mars",
-      "Avril",
-      "Mai",
-      "Juin",
-      "Juillet",
-      "Aout",
-      "Septembre",
-      "Octobre",
-      "Novembre",
-      "Décembre"
-    );
-    if($pMois < count($aMois)+1)
-      return $aMois[$pMois-1] ;
-  }
-
-  $aJour = array(
-    "L",
-    "M",
-    "M",
-    "J",
-    "V",
-    "S",
-    "D"
-  );
 
   // $time_start = microtime(true);
   // $time_end = microtime(true);
   // $execution_time = ($time_end - $time_start);
   // echo $execution_time;
+
+  require 'date.php';
 
   $db = Database::getInstance();
 
@@ -47,6 +20,10 @@ if (isset($_SESSION['idUser'])){
 
   $month = $_REQUEST['month'];
   $year = $_REQUEST['year'];
+
+  initDateByYear($year);
+  if (isNotWorkable(10, 11))
+    echo "not workable";
 
   $arrayLabel = $db->getLabels($month, $year);
 
@@ -120,7 +97,7 @@ if (isset($_SESSION['idUser'])){
 		{
 ?>
 <td data-number="<?php echo $j."\""; if(isset($arrayLabel[$result[$i]['name']][$j])) { echo 'data-colorlabel=\''.$arrayLabel[$result[$i]['name']][$j].'\''; } ?> 
-class="dayField <?php if (($iDay++ % 7) > 4) echo 'special'; ?>" 
+class="dayField <?php if (isNotWorkable($j, $month)) echo 'ferrie '; else if ((++$iDay % 7) > 4) echo 'we'; ?>" 
 style="min-width: 14px; height:10px;"></td>
 
 <?php
