@@ -291,6 +291,15 @@ class Database
     return $query->rowCount();
   }
 
+  public function modifyType($name, $oldName, $color)
+  {
+    $query = $this->db->prepare("UPDATE types SET name = ?, color = ? WHERE name = ? AND idPlanning = ?");
+
+    $query->execute(array($name, $color, $oldName, $_SESSION['currentPlanningId']));
+
+    return $query->rowCount();
+  }
+
   public function deletePlanning()
   {
     $query = $this->db->prepare("DELETE FROM plannings WHERE id = ?");

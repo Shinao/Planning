@@ -16,21 +16,39 @@ $(document).ready(function () {
       tinycolor(legend.children().eq(2).css('background-color')).toHex());
   }
 
+  $('#modType').on('click', function()
+  {
+    $.ajax(
+  {
+    type: "POST",
+      url: "api/modifyType.php?name=" + $("#nameType").val()
+      + "&oldName="+ $('.legendPlanningItem.focused').children().eq(0).html()
+      + "&color=" + encodeURIComponent(colorType),
+    success: function(xml)
+  {
+    var racine = xml.firstChild;
+    if (racine.nodeName == "success")
+    {
+      $('.legendPlanningItem.focused').children().eq(2).css('background-color', colorType);
+      $('.legendPlanningItem.focused').children().eq(0).html($("#nameType").val());
+    }
+    else
+    {
+      displayPopup("error", racine.firstChild.nodeValue);
+    }
+  }
+  });
+  });
+
   $('#delType').on('click', function()
     {
-      $.get('api/delType.php?name='+$(".legendPlanningItem.focused").children().eq(0), function(data)
+      $.get('api/delType.php?name='+$(".legendPlanningItem.focused").children().eq(0).html(), function(data)
     {
       var racine = data.firstChild;
       if (racine.nodeName == "success")
       {
-	$('.legendPlanningItem').each(function(index)
-      {
-	if($(this).find('span:eq(0)').text() == $('#typesCombobox').jqxDropDownList('getSelectedItem').label)
-	{
-	  $(this).remove();
-	  return false;
-	}
-      });
+	$(".legendPlanningItem.focused").remove();
+	$(".legendPlanningItem").eq(0).addClass("focused");
       }
       else if (racine.nodeName == "error")
       {
