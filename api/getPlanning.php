@@ -42,8 +42,10 @@ if (isset($_SESSION['idUser'])){
 	<td class="calendar"><?php echo $_SESSION['currentPlanningName']; ?></td>
 	<td class="month"><?php echo MoisFrancais($month)." ".$year; ?></td>
 	<td class="navig"><span id="btnPreviousMonth" class="btnNavigate raph"><</span><span id="btnThisMonth" class="btnNavigate text">AUJOURD'HUI</span><span id="btnNextMonth" class="btnNavigate raph">=</span></td>
-	</tr></table><div id="legendPlanning"><?php if ($_SESSION['guest'] != "true") {
-	  echo "<div class=\"legendPlanningItem focused\" data-id=\"-1\"><span>Supprimer</span><br/><span class=\"itemLegendColor\"></span></div>"; }
+	</tr></table><div id="legendPlanning">
+	<div class="legendPlanningItem" data-id="-2"><span>Férié</span><br/><span class="ferrie itemLegendColor"></span></div><div class="legendPlanningItem" data-id="-3"><span>Week End</span><br/><span class="itemLegendColor we"></span></div><?php 
+    if ($_SESSION['guest'] != "true") {
+	  echo "<div class=\"legendPlanningItem focused\" data-id=\"-1\"><span>Vide</span><br/><span class=\"itemLegendColor\"></span></div>"; }
 	    if($arrayType[0] != "null")
 	    {
 	      for($i = 0; $i < sizeof($arrayType); $i++)
@@ -73,7 +75,7 @@ if (isset($_SESSION['idUser'])){
 	    for ($i = 1;$i < $nbDays+1;$i++)
 	    {
 ?>
-	<td data-number="<?php echo $i; ?>" class="titleColumn" style="min-width: 14px; height:10px;"><?php echo $i; ?></td>
+	<td class="dayNumber" data-number="<?php echo $i; ?>" class="titleColumn" style="min-width: 14px; height:10px;"><?php echo $i; ?></td>
 <?php
 	    }
 	    if($_SESSION['guest'] == 'false')

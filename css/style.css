@@ -617,6 +617,7 @@ button.negative:active{
 {
   border: 1px solid #DDDDDD;
   text-align: center;
+  vertical-align: middle;
   background: none repeat scroll 0 0 #FAFAFA;
 }
 
@@ -633,12 +634,12 @@ button.negative:active{
   background: none repeat scroll 0 0 #FDFDFD;
 }
 
-#planning #text .planningTable td.ferrie
+.ferrie
 {
   background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(155, 155, 155, 0.408039) 5px, rgba(155, 155, 155, 0.408039) 10px) !important;
 }
 
-#planning #text .planningTable td.we
+.we
 {
   background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(155, 155, 155, 0.128039) 5px, rgba(155, 155, 155, 0.128039) 10px) !important;
 }
@@ -677,7 +678,19 @@ button.negative:active{
 
 #planning #text .planningTable tr.rowTablePlanning:last-child
 {
-  border-bottom: 2px solid #EBEBEB;
+  /* border-bottom: 2px solid #EBEBEB; */
+}
+
+#planning #text .planningTable tr.rowTablePlanning td.nameMember.focusable:hover, #planning #text .planningTable tr.rowTablePlanning td.dayNumber.focusable:hover
+{
+  background-color: #335B77;
+  cursor: pointer;
+}
+
+#planning #text .planningTable tr.rowTablePlanning td.nameMember.focusable.focused, #planning #text .planningTable tr.rowTablePlanning td.dayNumber.focusable.focused
+{
+  background-color: #0F1C25;
+  cursor: pointer;
 }
 
 #planning #text td .actionContainer
@@ -724,11 +737,23 @@ div.toolPlanningPad
   margin-left: 16px;
 }
 
+div.legendPlanningItemSpecial
+{
+  display: inline-block;
+  color: #898989;
+  padding: 0 8px;
+}
+
 div.legendPlanningItem
 {
   display: inline-block;
   color: #898989;
   padding: 0 8px;
+}
+
+div.legendPlanningItem.focused
+{
+  padding: 0 7px;
 }
 
 div.legendPlanningItem:hover
