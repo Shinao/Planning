@@ -71,9 +71,9 @@ $(document).delegate('#planning #text .planningTable td.dayField', 'mouseleave',
 $(document).delegate('#planning #text .planningTable td.dayField', 'click', function(evt)
   {
     var legend = $('#planning .legendPlanningItem.focused');
-    if (legend.length == 0)
+    if (legend.length == 0 || legend.attr('data-id') < -1)
     {
-      displayPopup("error", "Selectionnez d'abord un type de label");
+      displayPopup("error", "Type de label invalide");
       return ;
     }
 

@@ -1,4 +1,5 @@
 <script type="text/javascript">
+var	members = [];
 var	rep_days;
 var	rep_end_month;
 var	rep_end_day;
@@ -26,24 +27,22 @@ $(document).ready(function () {
       minWidth: 400,
       buttons: {
 	"Suivant": function() {
-	  $.ajax(
-	    {
-	      type: "POST",
-		url: "api/createPlanning.php",
-		data: $('#frmCreatePlanning').serialize(),
-		success: function(xml)
-		{
-		  var racine = xml.firstChild;
-		  if (racine.nodeName == "success")
-		  {
-		    // loadPlannings();
-		  }
-		  else
-		  {
-		    displayPopup("error", racine.firstChild.nodeValue);
-		  }
-		}
-	    });
+	  if ($(".dayNumber.focused").length == 0 || $(".nameMember.focused").length == 0)
+	  {
+	    displayPopup("error", "Selectionnez une date et des personnes");
+	    return ;
+	  }
+
+	  $(".nameMember.focused").each(function(index) {
+	    members.push($(this).html());
+	  });
+	  rep_days = $("#rep_days").val();
+	  rep_end_month = $("#rep_end_month").val();
+	  rep_end_day = $("#rep_end_day").val();
+	  rep_start_year = year;
+	  rep_start_month = month;
+	  rep_start_day = $(".dayNumber.focused").html();
+
 	  $(this).dialog( "close" );
 	  loadDialog('dialogRepetitionRules');
 	},
@@ -52,7 +51,6 @@ $(document).ready(function () {
 	  }
       },
 	close: function() {
-	  rep_days = $("#rep_days").val();
 	  resetEvents();
 	}
   }).draggable();
@@ -82,6 +80,6 @@ $(document).ready(function () {
 		<span>- Selectionnez la date de depart</span></br></br>
 		<span>Intervalle (Jours) : <input type="number" value="7" name="rep_days" id="rep_days" min="1" max="9999" class="text ui-widget-content ui-corner-all" /></span></br></br>
 		<span>Durée : <input type="number" name="rep_end_month" id="rep_end_month" value="0" min="0" max="12" class="text ui-widget-content ui-corner-all" /> Mois 
-		<input type="number" value="0" name="rep_day" id="rep_day" min="0" max="31" class="text ui-widget-content ui-corner-all" /> Jours</span></br>
+		<input type="number" value="0" name="rep_end_day" id="rep_end_day" min="0" max="31" class="text ui-widget-content ui-corner-all" /> Jours</span></br>
 	</form>
 </div>

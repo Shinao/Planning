@@ -10,10 +10,12 @@ $(document).ready(function () {
 	  $.ajax(
 	    {
 	      type: "POST",
-		url: "api/createPlanning.php",
-		data: $('#frmCreatePlanning').serialize(),
+		url: "api/action_repetition.php",
+		data: {'members' : members, 'exceptions' : exceptions, 'rep_days' : rep_days, 'rep_end_month' : rep_end_month, 'rep_end_day' : rep_end_day, 'rep_start_year' : rep_start_year, 'rep_start_month' : rep_start_month, 'rep_start_day' : rep_start_day},
 		success: function(xml)
 		{
+		  console.log(xml);
+		  return ;
 		  var racine = xml.firstChild;
 		  if (racine.nodeName == "success")
 		  {
