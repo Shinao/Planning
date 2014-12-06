@@ -169,9 +169,15 @@ class Database
 
   public function deleteType($name)
   {
-    $query = $this->db->prepare("DELETE FROM types WHERE name = ? AND idPlanning = ?");
-
+    $query = $this->db->prepare("SELECT id FROM types WHERE name = ? AND idPlanning = ?");
     $query->execute(array($name, $_SESSION['currentPlanningId']));
+    $id = $query->fetch()['id'];
+
+    $query = $this->db->prepare("DELETE FROM types WHERE name = ? AND idPlanning = ?");
+    $query->execute(array($name, $_SESSION['currentPlanningId']));
+
+    $query = $this->db->prepare("DELETE FROM labels WHERE idType = ?");
+    $query->execute(array($id));
 
     return $query->rowCount();
   }
@@ -208,6 +214,20 @@ class Database
 	$result[$row['name']][$row['idDay']] = $row['color'];
     else
       $result['return'] = "null";
+
+    return $result;
+  }
+
+  public function getLabelsByMember($member)
+  {
+    $query = $this->db->prepare("SELECT * FROM labels, members WHERE members.name = ? AND members.id = labels.idMember AND members.idPlanning = ?");
+    $query->execute(array($member, $_SESSION['currentPlanningId']));
+
+    if($query->rowCount() > 0)
+      while ($row = $query->fetch())
+	$result[$row['idYear']][$row['idMonth']][$row['idDay']] = $row['idType'];
+    else
+      $result = [];
 
     return $result;
   }

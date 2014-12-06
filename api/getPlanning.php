@@ -99,7 +99,7 @@ if (isset($_SESSION['idUser'])){
 		{
 ?>
 <td data-number="<?php echo $j."\""; if(isset($arrayLabel[$result[$i]['name']][$j])) { echo 'data-colorlabel=\''.$arrayLabel[$result[$i]['name']][$j].'\''; } ?> 
-class="dayField <?php if (isNotWorkable($j, $month)) echo 'ferrie '; else if ((++$iDay % 7) > 4) echo 'we'; ?>" 
+class="dayField <?php if (isNotWorkable($j, $month)) echo 'ferrie '; else if (($iDay % 7) > 4) echo 'we'; ++$iDay; ?>" 
 style="min-width: 14px; height:10px;"></td>
 
 <?php

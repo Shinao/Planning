@@ -11,7 +11,7 @@ $(document).ready(function () {
 	    {
 	      type: "POST",
 		url: "api/action_repetition.php",
-		data: {'members' : members, 'exceptions' : exceptions, 'rep_days' : rep_days, 'rep_end_month' : rep_end_month, 'rep_end_day' : rep_end_day, 'rep_start_year' : rep_start_year, 'rep_start_month' : rep_start_month, 'rep_start_day' : rep_start_day},
+		data: {'members' : members, 'exceptions' : exceptions, 'rep_days' : rep_days, 'rep_end_month' : rep_end_month, 'rep_end_day' : rep_end_day, 'rep_start_year' : rep_start_year, 'rep_start_month' : rep_start_month, 'rep_start_day' : rep_start_day, 'rep_type' : rep_type},
 		success: function(xml)
 		{
 		  console.log(xml);

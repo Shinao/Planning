@@ -1,4 +1,5 @@
 <script type="text/javascript">
+var	rep_type;
 var	members = [];
 var	rep_days;
 var	rep_end_month;
@@ -42,6 +43,7 @@ $(document).ready(function () {
 	  rep_start_year = year;
 	  rep_start_month = month;
 	  rep_start_day = $(".dayNumber.focused").html();
+	  rep_type = $(".legendPlanningItem.focused").data('id');
 
 	  $(this).dialog( "close" );
 	  loadDialog('dialogRepetitionRules');
