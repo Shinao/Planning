@@ -98,7 +98,7 @@ $(document).delegate('#planning #text .planningTable td.dayField', 'click', func
     // Add
     $.get('api/addLabel.php?member='+itemDay.parent().children().eq(0).text() + 
       '&day='+itemDay.attr('data-number') + '&year='+year+'&month='+month+
-      '&comment=none&color='+$('.legendPlanningItem.focused').children().eq(0).html(), function(data)
+      '&comment=none&color='+$('.legendPlanningItem.focused').data('id'), function(data)
       {
 	var racine = data.firstChild;
 	if (racine.nodeName == "success")

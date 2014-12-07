@@ -22,8 +22,6 @@ if (isset($_SESSION['idUser'])){
   $year = $_REQUEST['year'];
 
   initDateByYear($year);
-  if (isNotWorkable(10, 11))
-    echo "not workable";
 
   $arrayLabel = $db->getLabels($month, $year);
 
@@ -43,7 +41,7 @@ if (isset($_SESSION['idUser'])){
 	<td class="month"><?php echo MoisFrancais($month)." ".$year; ?></td>
 	<td class="navig"><span id="btnPreviousMonth" class="btnNavigate raph"><</span><span id="btnThisMonth" class="btnNavigate text">AUJOURD'HUI</span><span id="btnNextMonth" class="btnNavigate raph">=</span></td>
 	</tr></table><div id="legendPlanning">
-	<div class="legendPlanningItem" data-id="-2"><span>Férié</span><br/><span class="ferrie itemLegendColor"></span></div><div class="legendPlanningItem" data-id="-3"><span>Week End</span><br/><span class="itemLegendColor we"></span></div><?php 
+	<div class="legendPlanningItem" data-id="-3"><span>Férié</span><br/><span class="ferrie itemLegendColor"></span></div><div class="legendPlanningItem" data-id="-2"><span>Week End</span><br/><span class="itemLegendColor we"></span></div><?php 
     if ($_SESSION['guest'] != "true") {
 	  echo "<div class=\"legendPlanningItem focused\" data-id=\"-1\"><span>Vide</span><br/><span class=\"itemLegendColor\"></span></div>"; }
 	    if($arrayType[0] != "null")

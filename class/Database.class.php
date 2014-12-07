@@ -184,21 +184,16 @@ class Database
 
   public function addLabel($comment, $color, $member, $day, $month, $year)
   {
-    $queryExist = $this->db->prepare("DELETE FROM labels WHERE idMember = ? AND idDay = ? AND idMonth = ? AND idYear = ?");
-    $queryIdType = $this->db->prepare("SELECT id FROM types WHERE name = ?");
     $queryIdMember = $this->db->prepare("SELECT id FROM members WHERE name = ?");
-
     $queryIdMember->execute(array($member));
-    $queryIdType->execute(array($color));
-
     $idMember = $queryIdMember->fetch();
-    $idType = $queryIdType->fetch();
 
+    $queryExist = $this->db->prepare("DELETE FROM labels WHERE idMember = ? AND idDay = ? AND idMonth = ? AND idYear = ?");
     $queryExist->execute(array($idMember['id'], $day, $month, $year));
 
     $query = $this->db->prepare("INSERT INTO labels VALUES('', ?, ?, ?, ?, ?, ?)");
 
-    if(!$query->execute(array($comment, $idType['id'], $idMember['id'], $month, $day, $year)))
+    if(!$query->execute(array($comment, $color, $idMember['id'], $month, $day, $year)))
       return false;
 
     return true;
