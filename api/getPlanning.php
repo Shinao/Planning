@@ -115,7 +115,7 @@ style="min-width: 14px; height:10px;"></td>
 	    echo "<div class=\"toolPlanningPad\"><br/><span style=\"display: inline-block;height: 25px;\"> </span></div>";
 	    if($_SESSION['guest'] == 'false')
 	      echo '<span class="btnAddMember"><img class="resizedImgPlanning" src="img/user_add_32.png"/>Ajouter</span>';
-	    ?><span class="btnPrint"><img class="resizedImgPlanning" src="img/iconprint.png"/>Imprimer</span><span class="btnPDF" enable="disable"><img class="resizedImgPlanning" src="img/pdficon.png"/>PDF</span></div></div><?php
+	    ?><span class="btnPrint"><img class="resizedImgPlanning" src="img/iconprint.png"/>Imprimer</span><span class="btnImage" enable="disable"><img class="resizedImgPlanning" src="img/imageicon.png"/>IMAGE</span><span class="btnPDF" enable="disable"><img class="resizedImgPlanning" src="img/pdficon.png"/>PDF</span></div></div><?php
   } else
     echo 'Erreur lors de la recherche du planning';
 }

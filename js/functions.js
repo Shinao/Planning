@@ -104,6 +104,10 @@ function loadPlanning()
   }
   loadPlanning();
       });
+  $('span.btnImage').on('click', function()
+      {
+	generateImage();
+      });
   $('span.btnPDF').on('click', function()
       {
 	generatePDF();
@@ -156,12 +160,27 @@ function loadEventPlanningCB(){
   });
 }
 
+function generateImage()
+{
+ html2canvas($("#planning"), {
+   onrendered: function(canvas) {
+  // canvas is the final rendered <canvas> element
+  canvas.name = "test";
+  // var myImage = canvas.toDataURL("image/JPEG").slice('data:image/jpeg;base64,'.length);
+  var myImage = canvas.toDataURL("image/PNG");
+  var link = document.createElement('a');
+  link.download = 'Planning ' + $(".calendar").html() + " - " + $(".month").html() + '.png';
+  link.href = myImage;
+  link.click();
+  }});
+}
+
 function generatePDF()
 {
  html2canvas($("#planning"), {
    onrendered: function(canvas) {
   // canvas is the final rendered <canvas> element
-  var myImage = canvas.toDataURL("image/JPEG").slice('data:image/jpeg;base64,'.length);
+  var myImage = canvas.toDataURL("image/PNG").slice('data:image/png;base64,'.length);
   // Convert the data to binary form
   myImage = atob(myImage)
   //new object of jspdf and save image to pdf.

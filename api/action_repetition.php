@@ -5,28 +5,29 @@ require '../class/Database.class.php';
 require 'date.php';
 
 if (isset($_SESSION['idUser'])) {
-  // $exceptions = $_REQUEST['exceptions'];
-  // $members = $_REQUEST['members'];
-  // $rep_days = $_REQUEST['rep_days'];
-  // $rep_end_month = $_REQUEST['rep_end_month'];
-  // $rep_end_day = $_REQUEST['rep_end_day'];
-  // $rep_start_year = $_REQUEST['rep_start_year'];
-  // $rep_start_month = $_REQUEST['rep_start_month'];
-  // $rep_start_day = $_REQUEST['rep_start_day'];
-  // $rep_type = $_REQUEST['rep_type'];
-  // $rep_altern = $_REQUEST['rep_altern'];
-
   $SEC_DAY = 60 * 60 * 24;
-  $exceptions = [[-3, -2]];
-  $members = ['test', 'Unkow'];
-  $rep_days = 7;
-  $rep_end_month = 1;
-  $rep_end_day = 0;
-  $rep_start_year = 2014;
-  $rep_start_month = 12;
-  $rep_start_day = 6;
-  $rep_type = -1;
-  $rep_altern = false;
+
+  $exceptions = $_REQUEST['exceptions'];
+  $members = $_REQUEST['members'];
+  $rep_days = $_REQUEST['rep_days'];
+  $rep_end_month = $_REQUEST['rep_end_month'];
+  $rep_end_day = $_REQUEST['rep_end_day'];
+  $rep_start_year = $_REQUEST['rep_start_year'];
+  $rep_start_month = $_REQUEST['rep_start_month'];
+  $rep_start_day = $_REQUEST['rep_start_day'];
+  $rep_type = $_REQUEST['rep_type'];
+  $rep_altern = $_REQUEST['rep_altern'];
+
+  // $exceptions = [[-3, -2]];
+  // $members = ['test', 'Unkow'];
+  // $rep_days = 7;
+  // $rep_end_month = 1;
+  // $rep_end_day = 0;
+  // $rep_start_year = 2014;
+  // $rep_start_month = 12;
+  // $rep_start_day = 6;
+  // $rep_type = -1;
+  // $rep_altern = false;
 
   initDateByYear($rep_start_year);
 
@@ -70,12 +71,17 @@ if (isset($_SESSION['idUser'])) {
 	  continue 2;
       }
 
+      echo "IN";
+
       // Current Member is allowed
       $fcdate = getdate($current_date);
       print_r($fcdate);
       echo "<br>";
       if ($rep_type == -1)
+      {
+	echo "delete";
 	$db->deleteLabel($m, $fcdate['year'], $fcdate['mon'], $fcdate['mday']);
+      }
       else
 	$db->addLabel("", $rep_type, $m, $fcdate['mday'], $fcdate['mon'], $fcdate['year']);
 

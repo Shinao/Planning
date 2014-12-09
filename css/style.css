@@ -554,7 +554,7 @@ button.negative:active{
   padding: 4px 8px;
 }
 
-#planning #text .btnAddMember, #planning #text .btnPrint, #planning #text .btnPDF
+#planning #text .btnAddMember, #planning #text .btnPrint, #planning #text .btnPDF, #planning #text .btnImage
 {
   -moz-user-select: none;
   margin: 13px 4px 0 4px;
@@ -579,7 +579,7 @@ button.negative:active{
   float: left;
 }
 
-#planning #text .btnPrint, #planning #text .btnPDF
+#planning #text .btnPrint, #planning #text .btnPDF, #planning #text .btnImage
 {
   float: right;
 }
@@ -591,7 +591,7 @@ button.negative:active{
   vertical-align: bottom;
 }
 
-#planning #text .btnNavigate:hover, #planning #text .btnAddMember:hover, #planning #text .btnPrint:hover, #planning #text .btnPDF:hover
+#planning #text .btnNavigate:hover, #planning #text .btnAddMember:hover, #planning #text .btnPrint:hover, #planning #text .btnPDF:hover, #planning #text .btnImage:hover
 {
   background: none repeat scroll 0 0 #F7F7F7;
   cursor: pointer;
