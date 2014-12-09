@@ -1,9 +1,9 @@
 <span class="menuTool">
 <script type="text/javascript">
     $(document).ready(function () {
-    	$('#modifyGuestPass').on('click', function()
+    	$('#modifyPass').on('click', function()
     	{
-    		loadDialog('dialogModifyGuestPass');
+    		loadDialog('dialogModifyPass');
     	});
     	$('#modifyPlanning').on('click', function()
     	{
@@ -16,9 +16,9 @@
     });
 </script>
 <div id="textTool">
-	<button type="submit" id="modifyGuestPass" class="standard">
+	<button type="submit" id="modifyPass" class="standard">
         <img src="img/textfield_key.png" class="verticalized"/>
-        Modifier le mot de passe invit&eacute;
+        Modifier les mots de passe
     </button><br/><br/>
 	<button type="submit" id="modifyPlanning" class="standard">
         <img src="img/page_table_32.png" class="verticalized"/>

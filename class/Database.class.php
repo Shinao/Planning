@@ -279,6 +279,15 @@ class Database
     return $query->rowCount();
   }
 
+  public function modifyPass($pw)
+  {
+    $query = $this->db->prepare("UPDATE users SET password = ? WHERE id = ?");
+
+    $query->execute(array($pw, $_SESSION['idUser']));
+
+    return $query->rowCount();
+  }
+
   public function modifyGuestPass($pw)
   {
     $query = $this->db->prepare("UPDATE users SET guestpass = ? WHERE id = ?");

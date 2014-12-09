@@ -39,79 +39,79 @@ function loadPlanning()
 	var typeid = $(".legendPlanningItem.focused").attr('data-id');
 	$('#planning #text').html(data);
 	if (typeid)
-        {
-	  $(".legendPlanningItem").removeClass("focused");
-          $(".legendPlanningItem[data-id='"+typeid+"']").addClass("focused");
+  {
+    $(".legendPlanningItem").removeClass("focused");
+    $(".legendPlanningItem[data-id='"+typeid+"']").addClass("focused");
+  }
+  $('[data-colorlabel]').each(function(index)
+    {
+      $(this).attr('data-colordefault', $(this).css('background-color')).css('background-color', $(this).attr('data-colorlabel'));
+    });
+  $('.btnAddMember').on('click', function()
+    {
+      loadDialog('dialogAddMember');
+    });
+  $('span.modifyMember').on('click', function()
+    {
+      focusedMember = $(this).parent().parent().children().eq(0);
+      loadDialog('dialogModifyMember');
+    });
+  $('span.deleteMember').on('click', function()
+      {
+	var trElement = $(this).parent().parent();
+	$.get('api/delMember.php?name='+trElement.children().eq(0).text(), function(data)
+	  {
+	    var racine = data.firstChild;
+	    if (racine.nodeName == "success")
+	{
+	  trElement.remove();
 	}
-	$('[data-colorlabel]').each(function(index)
-	  {
-	    $(this).attr('data-colordefault', $(this).css('background-color')).css('background-color', $(this).attr('data-colorlabel'));
-	  });
-	$('.btnAddMember').on('click', function()
-	  {
-	    loadDialog('dialogAddMember');
-	  });
-	$('span.modifyMember').on('click', function()
-	  {
-	    focusedMember = $(this).parent().parent().children().eq(0);
-	    loadDialog('dialogModifyMember');
-	  });
-	$('span.deleteMember').on('click', function()
-	  {
-	    var trElement = $(this).parent().parent();
-	    $.get('api/delMember.php?name='+trElement.children().eq(0).text(), function(data)
-	      {
-		var racine = data.firstChild;
-		if (racine.nodeName == "success")
-	    {
-	      trElement.remove();
-	    }
-		else if (racine.nodeName == "error")
-	    {
-	      displayPopup("error", racine.firstChild.nodeValue);
-	    }
-	      });
-	  });
-	$('span#btnThisMonth').on('click', function()
-	    {
-	      year = mydate.getYear();
-	      if (year < 1000)
-	  year += 1900;
-	month = mydate.getMonth()+1;
-	loadPlanning();
-	    });
-	$('span#btnPreviousMonth').on('click', function()
-	    {
-	      if(month == 1)
+	    else if (racine.nodeName == "error")
 	{
-	  month = 12;
-	  year = year - 1;
-	} else
-	{
-	  month = month - 1;
+	  displayPopup("error", racine.firstChild.nodeValue);
 	}
-	loadPlanning();
-	    });
-	$('span#btnNextMonth').on('click', function()
-	{
-	  if(month == 12)
-	{
-	  month = 1;
-	  year = year + 1;
-	} else
-	{
-	  month = month + 1;
-	}
-	loadPlanning();
-	    });
-	$('span.btnPDF').on('click', function()
-	    {
-	      window.open('api/generatePDF.php');
-	    });
-	$('span.btnPrint').on('click', function()
-	    {
-	      $('div.planningContainer').printElement({printMode:'popup', pageTitle: 'Planning', leaveOpen: true, overrideElementCSS:['css/printPlanning.css', 'css/cssreset.css']});
-	    });
+	  });
+      });
+  $('span#btnThisMonth').on('click', function()
+      {
+	year = mydate.getYear();
+	if (year < 1000)
+    year += 1900;
+  month = mydate.getMonth()+1;
+  loadPlanning();
+      });
+  $('span#btnPreviousMonth').on('click', function()
+      {
+	if(month == 1)
+  {
+    month = 12;
+    year = year - 1;
+  } else
+  {
+    month = month - 1;
+  }
+  loadPlanning();
+      });
+  $('span#btnNextMonth').on('click', function()
+      {
+	if(month == 12)
+  {
+    month = 1;
+    year = year + 1;
+  } else
+  {
+    month = month + 1;
+  }
+  loadPlanning();
+      });
+  $('span.btnPDF').on('click', function()
+      {
+	generatePDF();
+      });
+  $('span.btnPrint').on('click', function()
+      {
+	$('div.planningContainer').printElement({printMode:'popup', pageTitle: 'Planning', leaveOpen: true, overrideElementCSS:['css/printPlanning.css', 'css/cssreset.css']});
+      });
       });
 }
 
@@ -154,4 +154,22 @@ function loadEventPlanningCB(){
       displayPopup("error", racine.firstChild.nodeValue);
       });
   });
+}
+
+function generatePDF()
+{
+ html2canvas($("#planning"), {
+   onrendered: function(canvas) {
+  // canvas is the final rendered <canvas> element
+  var myImage = canvas.toDataURL("image/JPEG").slice('data:image/jpeg;base64,'.length);
+  // Convert the data to binary form
+  myImage = atob(myImage)
+  //new object of jspdf and save image to pdf.
+  console.log(canvas);
+  var ratio = 1.5;
+  var doc = new jsPDF('l', 'px', [canvas.width / ratio , canvas.height / ratio]);
+  doc.addImage(myImage, 'JPEG', 0, 0, canvas.width / ratio , canvas.height / ratio);
+  doc.save('Planning ' + $(".calendar").html() + " - " + $(".month").html());
+  }
+ });
 }

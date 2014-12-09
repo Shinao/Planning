@@ -27,6 +27,7 @@ $(document).ready(function () {
     autoOpen: false,
       modal: false,
       minWidth: 400,
+      position: { my: "right center", at: "right center"},
       buttons: {
 	"Suivant": function() {
 	  if ($(".dayNumber.focused").length == 0 || $(".nameMember.focused").length == 0 || $(".legendPlanningItem.focused").data('id') < -1)

@@ -16,6 +16,10 @@ session_start();
 <script type="text/javascript" src="js/jqwidgets/jqxlistbox.js"></script>
 <script type="text/javascript" src="js/jqwidgets/jqxdropdownlist.js"></script>
 <script type="text/javascript" src="js/tinycolor.js"></script>
+<script type="text/javascript" src="js/jspdf.min.js"></script>
+<script type="text/javascript" src="js/filesaver-min.js"></script>
+<script type="text/javascript" src="js/html2canvas.js"></script>
+<script type="text/javascript" src="js/canvas2image.js"></script>
 <script>
 $(document).ready(function()
   {
