@@ -7,7 +7,10 @@ require 'date.php';
 if (isset($_SESSION['idUser'])) {
   $SEC_DAY = 60 * 60 * 24;
 
-  $exceptions = $_REQUEST['exceptions'];
+  if (isset($_REQUEST['exceptions']))
+    $exceptions = $_REQUEST['exceptions'];
+  else
+    $exceptions = [];
   $members = $_REQUEST['members'];
   $rep_days = $_REQUEST['rep_days'];
   $rep_end_month = $_REQUEST['rep_end_month'];
@@ -16,9 +19,9 @@ if (isset($_SESSION['idUser'])) {
   $rep_start_month = $_REQUEST['rep_start_month'];
   $rep_start_day = $_REQUEST['rep_start_day'];
   $rep_type = $_REQUEST['rep_type'];
-  $rep_altern = $_REQUEST['rep_altern'];
+  $rep_altern = $_REQUEST['rep_altern'] == "true" ? true : false;
 
-  // $exceptions = [[-3, -2]];
+  // $exceptions = [];
   // $members = ['test', 'Unkow'];
   // $rep_days = 7;
   // $rep_end_month = 1;
@@ -26,8 +29,10 @@ if (isset($_SESSION['idUser'])) {
   // $rep_start_year = 2014;
   // $rep_start_month = 12;
   // $rep_start_day = 6;
-  // $rep_type = -1;
+  // $rep_type = 5;
   // $rep_altern = false;
+
+  echo $rep_altern;
 
   initDateByYear($rep_start_year);
 
