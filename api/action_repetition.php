@@ -47,6 +47,7 @@ if (isset($_SESSION['idUser'])) {
   $current_date = $startdate;
   $current_members = $members;
 
+  echo "<warning>";
   echo "Begin</br>";
   echo "Start: " . date('d-m-Y', $startdate) . "</br>";
   echo "End: " . date('d-m-Y', $enddate) . "</br>";
@@ -110,20 +111,6 @@ if (isset($_SESSION['idUser'])) {
     $current_date += $rep_days * $SEC_DAY;
   }
 
-  // echo "EXCEPTIONS: <br>";
-  // foreach ($exceptions as $ex) idType - dayjmp
-  //   echo $ex[0] . " - " . $ex[1] . "<br>";
-
-
-  // $result = $db->addMember($name);
-
-  // if($result != false)
-  // {
-  //   if($result === 3)
-  //     echo '<error>Une personne dans ce planning possede deja ce nom</error>';
-  //   else
-  //     echo '<success></success>';
-  // } else
-  //   echo '<error>Erreur lors de l\'ajout du membre</error>';
+  echo "</warning>";
 }
 ?>

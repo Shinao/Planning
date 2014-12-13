@@ -135,6 +135,8 @@ class Database
 
   public function addType($name, $color)
   {
+    $this->planningUpdated();
+
     $queryCheck = $this->db->prepare("SELECT * FROM types WHERE name = ? AND idPlanning = ?");
     $queryCheck->execute(array($name, $_SESSION['currentPlanningId']));
 
@@ -169,6 +171,8 @@ class Database
 
   public function deleteType($name)
   {
+    $this->planningUpdated();
+
     $query = $this->db->prepare("SELECT id FROM types WHERE name = ? AND idPlanning = ?");
     $query->execute(array($name, $_SESSION['currentPlanningId']));
     $id = $query->fetch()['id'];
@@ -184,6 +188,8 @@ class Database
 
   public function addLabel($comment, $color, $member, $day, $month, $year)
   {
+    $this->planningUpdated();
+
     $queryIdMember = $this->db->prepare("SELECT id FROM members WHERE name = ?");
     $queryIdMember->execute(array($member));
     $idMember = $queryIdMember->fetch();
@@ -241,6 +247,8 @@ class Database
 
   public function deleteLabel($member, $year, $month, $day)
   {
+    $this->planningUpdated();
+
     $queryIdMember = $this->db->prepare("SELECT id FROM members WHERE name = ?");
     $queryIdMember->execute(array($member));
     $idMember = $queryIdMember->fetch();
@@ -254,6 +262,8 @@ class Database
 
   public function addMember($name)
   {
+    $this->planningUpdated();
+
     $queryCheck = $this->db->prepare("SELECT * FROM members WHERE name = ? AND idPlanning = ?");
     $queryCheck->execute(array($name, $_SESSION['currentPlanningId']));
 
@@ -272,6 +282,8 @@ class Database
 
   public function deleteMember($name)
   {
+    $this->planningUpdated();
+
     $query = $this->db->prepare("DELETE FROM members WHERE name = ? AND idPlanning = ?");
 
     $query->execute(array($name, $_SESSION['currentPlanningId']));
@@ -288,6 +300,12 @@ class Database
     return $query->rowCount();
   }
 
+  public function planningUpdated()
+  {
+    $query = $this->db->prepare("UPDATE plannings SET date = CURDATE() WHERE id = ?");
+    $query->execute(array($_SESSION['currentPlanningId']));
+  }
+
   public function modifyGuestPass($pw)
   {
     $query = $this->db->prepare("UPDATE users SET guestpass = ? WHERE id = ?");
@@ -299,6 +317,8 @@ class Database
 
   public function modifyMember($name, $oldName)
   {
+    $this->planningUpdated();
+
     $query = $this->db->prepare("UPDATE members SET name = ? WHERE name = ? AND idPlanning = ?");
 
     $query->execute(array($name, $oldName, $_SESSION['currentPlanningId']));
@@ -308,6 +328,8 @@ class Database
 
   public function modifyPlanning($name)
   {
+    $this->planningUpdated();
+
     $query = $this->db->prepare("UPDATE plannings SET name = ? WHERE id = ?");
 
     $query->execute(array($name, $_SESSION['currentPlanningId']));
@@ -317,6 +339,8 @@ class Database
 
   public function modifyType($name, $oldName, $color)
   {
+    $this->planningUpdated();
+
     $query = $this->db->prepare("UPDATE types SET name = ?, color = ? WHERE name = ? AND idPlanning = ?");
 
     $query->execute(array($name, $color, $oldName, $_SESSION['currentPlanningId']));

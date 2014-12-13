@@ -27,7 +27,7 @@ $(document).ready(function () {
     autoOpen: false,
       modal: false,
       minWidth: 400,
-      position: { my: "right center", at: "right center"},
+      position: { my: "left center", at: "left center"},
       buttons: {
 	"Suivant": function() {
 	  if ($(".dayNumber.focused").length == 0 || $(".nameMember.focused").length == 0 || $(".legendPlanningItem.focused").data('id') < -1)
@@ -63,13 +63,13 @@ $(document).ready(function () {
   // Setup events
   $(".nameMember").each(function(index) { 
     $(this).addClass('focusable');
-    $(this).on('click', function() {
+    $(this).off().on('click', function() {
       $(this).toggleClass('focused');
     });
   });
   $(".dayNumber").each(function(index) { 
     $(this).addClass('focusable');
-    $(this).on('click', function() {
+    $(this).off().on('click', function() {
       if ($(".dayNumber.focusable.focused").length > 0)
 	$(".dayNumber.focusable.focused").removeClass('focused');
       $(this).addClass('focused');

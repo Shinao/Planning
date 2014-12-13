@@ -114,7 +114,8 @@ function loadPlanning()
       });
   $('span.btnPrint').on('click', function()
       {
-	$('div.planningContainer').printElement({printMode:'popup', pageTitle: 'Planning', leaveOpen: true, overrideElementCSS:['css/printPlanning.css', 'css/cssreset.css']});
+	window.print();
+	// $('div.planningContainer').printElement({printMode:'popup', pageTitle: 'Planning', leaveOpen: true, overrideElementCSS:['css/printPlanning.css', 'css/cssreset.css']});
       });
       });
 }

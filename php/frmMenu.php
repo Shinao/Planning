@@ -55,6 +55,13 @@ if ($_SESSION['guest'] == "true")
 {
   $("#planning .legendPlanningItem").removeClass('focused');
   $(this).addClass('focused');
+
+  if ($("#typesTool").hasClass('focused'))
+  {
+    $("#textTool #nameType").val($(this).children().eq(0).html());
+    $(".color-picker").minicolors('value', 
+      tinycolor($(this).children().eq(2).css('background-color')).toHex());
+  }
 });
 
 $(document).delegate('#planning #text .planningTable td.dayField', 'mouseenter', function(evt){
