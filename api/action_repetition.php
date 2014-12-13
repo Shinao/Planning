@@ -6,6 +6,7 @@ require 'date.php';
 
 if (isset($_SESSION['idUser'])) {
   $SEC_DAY = 60 * 60 * 24;
+  $warnings = [];
 
   if (isset($_REQUEST['exceptions']))
     $exceptions = $_REQUEST['exceptions'];
@@ -32,8 +33,6 @@ if (isset($_SESSION['idUser'])) {
   // $rep_type = 5;
   // $rep_altern = false;
 
-  echo $rep_altern;
-
   initDateByYear($rep_start_year);
 
   $db = new Database();
@@ -47,10 +46,9 @@ if (isset($_SESSION['idUser'])) {
   $current_date = $startdate;
   $current_members = $members;
 
-  echo "<warning>";
-  echo "Begin</br>";
-  echo "Start: " . date('d-m-Y', $startdate) . "</br>";
-  echo "End: " . date('d-m-Y', $enddate) . "</br>";
+  // echo "Begin</br>";
+  // echo "Start: " . date('d-m-Y', $startdate) . "</br>";
+  // echo "End: " . date('d-m-Y', $enddate) . "</br>";
   // While the repetition is not over
   while ($enddate > $current_date)
   {
@@ -74,20 +72,19 @@ if (isset($_SESSION['idUser'])) {
 	($e[0] == -2 && ($fex_date['wday'] == 0 || $fex_date['wday'] == 6)) ||
 	($e[0] == -3 && isNotWorkable($fex_date['mday'], $fex_date['mon'])) ||
 	($is_set && $label == $e[0]))
+	{
+	  // Warning
+	  if (!$rep_altern || $iMember + 1 == count($current_members))
+	    $warnings[date('d-m-Y', $current_date) . " : " . $m . "<br>"] = "";
 	  continue 2;
+	}
       }
-
-      echo "IN";
 
       // Current Member is allowed
       $fcdate = getdate($current_date);
-      print_r($fcdate);
-      echo "<br>";
+      // print_r($fcdate);
       if ($rep_type == -1)
-      {
-	echo "delete";
 	$db->deleteLabel($m, $fcdate['year'], $fcdate['mon'], $fcdate['mday']);
-      }
       else
 	$db->addLabel("", $rep_type, $m, $fcdate['mday'], $fcdate['mon'], $fcdate['year']);
 
@@ -99,18 +96,20 @@ if (isset($_SESSION['idUser'])) {
     }
 
     // Refill members
-    print_r($current_members);
+    // print_r($current_members);
     $current_members = array_merge($current_members, $members);
-    echo "<br>";
-    print_r($current_members);
-    echo "<br>";
-    echo "<br>";
-    echo "<br>";
+    // echo "<br>";
+    // print_r($current_members);
+    // echo "<br>";
+    // echo "<br>";
+    // echo "<br>";
 
     // Increment by the days of the repetition
     $current_date += $rep_days * $SEC_DAY;
   }
 
-  echo "</warning>";
+  // Display all warnings
+  foreach($warnings as $w => $v)
+    echo $w;
 }
 ?>
