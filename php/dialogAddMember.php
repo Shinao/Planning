@@ -15,20 +15,9 @@ $().ready(function()
 		{
 		  var racine = xml.firstChild;
 		  if (racine.nodeName == "success")
-		  {
-		    nbTd = $('table.planningTable thead tr:first-child td').length - 2;
-		    html = "<tr class='rowTablePlanning'><td class='nameMember'>"+$('#frmAddMember #name').val()+"</td>";
-		    for(i = 1; i <= nbTd; i++)
-		    {
-		      html = html + "<td class='dayField' style='min-width: 14px; height:10px;' data-number='"+i+"'></td>";
-		    }
-		    html = html + "<td><span class='raph btnAction modifyMember' style='margin-left: -4px; margin-top: -1px;'>a</span><span class='raph btnAction deleteMember'>&Acirc;</span></td></tr>";
-		    $('table.planningTable tbody').append(html);
-		  }
+		    loadPlanning();
 		  else
-		  {
 		    displayPopup("error", racine.firstChild.nodeValue);
-		  }
 		}
 	    });
 	  $("#dialogAddMember").dialog( "close" );
