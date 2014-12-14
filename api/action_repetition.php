@@ -23,15 +23,26 @@ if (isset($_SESSION['idUser'])) {
   $rep_altern = $_REQUEST['rep_altern'] == "true" ? true : false;
 
   // $exceptions = [];
-  // $members = ['test', 'Unkow'];
+  // $members = ['R.DRIEUX', 'M.AHNOU', 'E.COMTE', 'S.GORI'];
   // $rep_days = 7;
-  // $rep_end_month = 1;
+  // $rep_end_month = 6;
   // $rep_end_day = 0;
-  // $rep_start_year = 2014;
-  // $rep_start_month = 12;
-  // $rep_start_day = 6;
-  // $rep_type = 5;
+  // $rep_start_year = 2015;
+  // $rep_start_month = 1;
+  // $rep_start_day = 4;
+  // $rep_type = -1;
   // $rep_altern = false;
+
+  // $exceptions = [[47, -1], [47, -8], [47, 6], [41, -2], [41, 1], [47, -7]];
+  // $members = ['R.DRIEUX', 'M.AHNOU', 'E.COMTE', 'S.GORI'];
+  // $rep_days = 7;
+  // $rep_end_month = 6;
+  // $rep_end_day = 0;
+  // $rep_start_year = 2015;
+  // $rep_start_month = 1;
+  // $rep_start_day = 4;
+  // $rep_type = 47;
+  // $rep_altern = true;
 
   initDateByYear($rep_start_year);
 
@@ -58,6 +69,8 @@ if (isset($_SESSION['idUser'])) {
     {
       ++$iMember;
       // Checking each exceptions for the member
+      if (date('m-d-Y', $current_date) == "03-29-2015")
+	echo "Checking " . $m . "<br>";
       foreach ($exceptions as $e)
       {
 	$ex_date = $current_date + ($SEC_DAY * $e[1]);
@@ -65,6 +78,9 @@ if (isset($_SESSION['idUser'])) {
 	$is_set = isset($labels[$m][$fex_date['year']][$fex_date['mon']][$fex_date['mday']]);
 	if ($is_set)
 	  $label = $labels[$m][$fex_date['year']][$fex_date['mon']][$fex_date['mday']];
+
+	if (date('m-d-Y', $current_date) == "03-29-2015")
+	  echo "Ex " . $e[0] . "->" . $e[1] . "<br>";
 
 	// Check special exception
 	// Empty - WE - Ferie
@@ -78,15 +94,23 @@ if (isset($_SESSION['idUser'])) {
 	    $warnings[date('d-m-Y', $current_date) . " : " . $m . "<br>"] = "";
 	  continue 2;
 	}
+      if (date('m-d-Y', $current_date) == "29-03-2015")
+	echo "OK<br>";
       }
 
       // Current Member is allowed
       $fcdate = getdate($current_date);
       // print_r($fcdate);
       if ($rep_type == -1)
+      {
 	$db->deleteLabel($m, $fcdate['year'], $fcdate['mon'], $fcdate['mday']);
+	unset($labels[$m][$fcdate['year']][$fcdate['mon']][$fcdate['mday']]);
+      }
       else
+      {
 	$db->addLabel("", $rep_type, $m, $fcdate['mday'], $fcdate['mon'], $fcdate['year']);
+	$labels[$m][$fcdate['year']][$fcdate['mon']][$fcdate['mday']] = $rep_type;
+      }
 
       unset($current_members[$iMember]);
 

@@ -27,7 +27,7 @@ $(document).ready(function () {
     autoOpen: false,
       modal: false,
       minWidth: 500,
-      position: { my: "left center", at: "left center"},
+      position: { my: "right center", at: "right center"},
       buttons: {
 	"Suivant": function() {
 	  if ($(".dayNumber.focused").length == 0 || $(".nameMember.focused").length == 0 || $(".legendPlanningItem.focused").data('id') < -1)
@@ -58,7 +58,7 @@ $(document).ready(function () {
 	close: function() {
 	  resetEvents();
 	}
-  }).draggable();
+  });
   $(".ui-dialog").css('opacity', 0.8);
 
   // Setup events

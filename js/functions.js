@@ -189,7 +189,7 @@ function generatePDF()
   var ratio = 1.5;
   var doc = new jsPDF('l', 'px', [canvas.width / ratio , canvas.height / ratio]);
   doc.addImage(myImage, 'JPEG', 0, 0, canvas.width / ratio , canvas.height / ratio);
-  doc.save('Planning ' + $(".calendar").html() + " - " + $(".month").html());
+  doc.save('Planning ' + $(".calendar").html() + " - " + $(".month").html() + '.pdf');
   }
  });
 }

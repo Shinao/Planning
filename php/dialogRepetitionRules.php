@@ -5,7 +5,7 @@ $(document).ready(function () {
     autoOpen: false,
       modal: false,
       minWidth: 500,
-      position: { my: "left center", at: "left center"},
+      position: { my: "right center", at: "right center"},
       buttons: {
 	"Retour": function() {
 	  $(this).dialog( "close" );
@@ -30,7 +30,7 @@ $(document).ready(function () {
 		      autoOpen: true,
 			modal: false,
 			position: { my: "left center", at: "left center"},
-			minWidth: 400}).draggabble;
+			minWidth: 400});
 		      $("#dialogRepetitionWarning").html(data);
 		  }
 		}
@@ -44,7 +44,7 @@ $(document).ready(function () {
 	close: function() {
 	  $("#rulescontainer").html("");
 	}
-  }).draggable();
+  });
   $(".ui-dialog").css('opacity', 0.8);
 
   $("#addException").off().on('click', function()
