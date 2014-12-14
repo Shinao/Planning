@@ -69,8 +69,6 @@ if (isset($_SESSION['idUser'])) {
     {
       ++$iMember;
       // Checking each exceptions for the member
-      if (date('m-d-Y', $current_date) == "03-29-2015")
-	echo "Checking " . $m . "<br>";
       foreach ($exceptions as $e)
       {
 	$ex_date = $current_date + ($SEC_DAY * $e[1]);
@@ -78,9 +76,6 @@ if (isset($_SESSION['idUser'])) {
 	$is_set = isset($labels[$m][$fex_date['year']][$fex_date['mon']][$fex_date['mday']]);
 	if ($is_set)
 	  $label = $labels[$m][$fex_date['year']][$fex_date['mon']][$fex_date['mday']];
-
-	if (date('m-d-Y', $current_date) == "03-29-2015")
-	  echo "Ex " . $e[0] . "->" . $e[1] . "<br>";
 
 	// Check special exception
 	// Empty - WE - Ferie
@@ -94,8 +89,6 @@ if (isset($_SESSION['idUser'])) {
 	    $warnings[date('d-m-Y', $current_date) . " : " . $m . "<br>"] = "";
 	  continue 2;
 	}
-      if (date('m-d-Y', $current_date) == "29-03-2015")
-	echo "OK<br>";
       }
 
       // Current Member is allowed
@@ -124,7 +117,6 @@ if (isset($_SESSION['idUser'])) {
     $current_members = array_merge($current_members, $members);
     // echo "<br>";
     // print_r($current_members);
-    // echo "<br>";
     // echo "<br>";
     // echo "<br>";
 

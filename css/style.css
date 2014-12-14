@@ -639,16 +639,6 @@ button.negative:active{
   background: none repeat scroll 0 0 #FDFDFD;
 }
 
-.ferrie
-{
-  background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(155, 155, 155, 0.808039) 5px, rgba(155, 155, 155, 0.808039) 10px) !important;
-}
-
-.we
-{
-  background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(155, 155, 155, 0.428039) 5px, rgba(155, 155, 155, 0.428039) 10px) !important;
-}
-
 #planning #text .planningTable .btnAction
 {
   border: 1px solid #DDDDDD;
@@ -786,4 +776,16 @@ span.itemLegendColor
   height: 16px;
   display: inline-block;
   margin-bottom: 8px;
+}
+
+#planning #text .ferrie
+{
+  /* background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(155, 155, 155, 0.808039) 5px, rgba(155, 155, 155, 0.808039) 10px) !important; */
+  background-image: url("../img/strip_fe.png") !important;
+}
+
+#planning #text .we
+{
+  /* background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(155, 155, 155, 0.428039) 5px, rgba(155, 155, 155, 0.428039) 10px) !important; */
+  background-image: url("../img/strip_we.png") !important;
 }
