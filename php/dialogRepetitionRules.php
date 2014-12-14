@@ -4,7 +4,7 @@ $(document).ready(function () {
   $("#dialogRepetitionRules").dialog({
     autoOpen: false,
       modal: false,
-      minWidth: 400,
+      minWidth: 500,
       position: { my: "left center", at: "left center"},
       buttons: {
 	"Retour": function() {
@@ -45,6 +45,7 @@ $(document).ready(function () {
 	  $("#rulescontainer").html("");
 	}
   }).draggable();
+  $(".ui-dialog").css('opacity', 0.8);
 
   $("#addException").off().on('click', function()
 {

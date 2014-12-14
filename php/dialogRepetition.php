@@ -26,7 +26,7 @@ $(document).ready(function () {
   $("#dialogRepetition").dialog({
     autoOpen: false,
       modal: false,
-      minWidth: 400,
+      minWidth: 500,
       position: { my: "left center", at: "left center"},
       buttons: {
 	"Suivant": function() {
@@ -59,6 +59,7 @@ $(document).ready(function () {
 	  resetEvents();
 	}
   }).draggable();
+  $(".ui-dialog").css('opacity', 0.8);
 
   // Setup events
   $(".nameMember").each(function(index) { 

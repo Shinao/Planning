@@ -21,6 +21,11 @@ body
   -moz-user-select: none;
 }
 
+.ui-dialog
+{
+  /* opacity: 0.6; */
+}
+
 #dialogContainer
 {
   display: none;
