@@ -7,6 +7,14 @@ $(document).ready(function () {
       minWidth: 400,
       position: { my: "left center", at: "left center"},
       buttons: {
+	"Retour": function() {
+	  $(this).dialog( "close" );
+	  loadDialog("dialogRepetition");
+	},
+	"Effacer": function() {
+	  exceptions = [];
+	  $("#rulescontainer").html("");
+	},
 	"Finir": function() {
 	  $.ajax(
 	    {

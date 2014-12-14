@@ -119,7 +119,7 @@ class Database
 
   public function getMembersByPlanning()
   {
-    $query = $this->db->prepare("SELECT members.name FROM plannings, members WHERE members.idPlanning = plannings.id AND plannings.id = ?");
+    $query = $this->db->prepare("SELECT members.name FROM plannings, members WHERE members.idPlanning = plannings.id AND plannings.id = ? ORDER BY members.id");
 
     if(!$query->execute(array($_SESSION['currentPlanningId'])))
       return false;
@@ -190,8 +190,8 @@ class Database
   {
     $this->planningUpdated();
 
-    $queryIdMember = $this->db->prepare("SELECT id FROM members WHERE name = ?");
-    $queryIdMember->execute(array($member));
+    $queryIdMember = $this->db->prepare("SELECT id FROM members WHERE name = ? AND idPlanning = ?");
+    $queryIdMember->execute(array($member, $_SESSION['currentPlanningId']));
     $idMember = $queryIdMember->fetch();
 
     $queryExist = $this->db->prepare("DELETE FROM labels WHERE idMember = ? AND idDay = ? AND idMonth = ? AND idYear = ?");
