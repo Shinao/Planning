@@ -16,6 +16,7 @@ if (isset($_SESSION['idUser'])){
 
   $db = Database::getInstance();
 
+  $info = $db->getInfoPlanning();
   $result = $db->getMembersByPlanning();
 
   $month = $_REQUEST['month'];
@@ -111,7 +112,7 @@ class="dayField <?php if (isNotWorkable($j, $month)) echo 'ferrie '; else if (($
 ?>
 						</tbody>
 						</table><div id="toolPlanning"><?php
-	    echo "<div class=\"toolPlanningPad\"><br/><span id=\"datePlanning\"\">TEST</span></div>";
+	    echo "<div class=\"toolPlanningPad\"><br/><span id=\"datePlanning\"\">MODIFI&eacute; LE " . date('d/m/Y', strtotime($info['date'])) . "</span></div>";
 	    if($_SESSION['guest'] == 'false')
 	      echo '<span class="btnAddMember"><img class="resizedImgPlanning" src="img/user_add_32.png"/>Ajouter</span>';
 	    ?><span class="btnPrint"><img class="resizedImgPlanning" src="img/iconprint.png"/>Imprimer</span><span class="btnImage" enable="disable"><img class="resizedImgPlanning" src="img/imageicon.png"/>IMAGE</span><span class="btnPDF" enable="disable"><img class="resizedImgPlanning" src="img/pdficon.png"/>PDF</span></div></div><?php

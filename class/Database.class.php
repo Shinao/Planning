@@ -37,12 +37,12 @@ class Database
   {
     $query = $this->db->prepare("SELECT * FROM users WHERE pseudo = ? AND password = ?");
 
-    if(!$query->execute(array($pseudo, $password)))
+    if (!$query->execute(array($pseudo, $password)))
       return false;
 
     $row = $query->fetch();
 
-    if($query->rowCount() > 0){
+    if ($query->rowCount() > 0){
       $result['id'] = $row['id'];
       $result['pseudo'] = $row['pseudo'];
       return $result;
@@ -56,12 +56,12 @@ class Database
   {
     $query = $this->db->prepare("SELECT * FROM users WHERE pseudo = ? AND guestpass = ?");
 
-    if(!$query->execute(array($pseudo, $guestpass)))
+    if (!$query->execute(array($pseudo, $guestpass)))
       return false;
 
     $row = $query->fetch();
 
-    if($query->rowCount() > 0){
+    if ($query->rowCount() > 0){
       $result['id'] = $row['id'];
       $result['pseudo'] = $row['pseudo'];
       return $result;
@@ -76,11 +76,11 @@ class Database
     $queryCheck = $this->db->prepare("SELECT * FROM plannings WHERE name = ?");
     $queryCheck->execute(array($name));
 
-    if($queryCheck->rowCount() == 0)
+    if ($queryCheck->rowCount() == 0)
     {
       $query = $this->db->prepare("INSERT INTO plannings VALUES('', CURDATE(), ?, ?)");
 
-      if(!$query->execute(array($_SESSION['idUser'], $name)))
+      if (!$query->execute(array($_SESSION['idUser'], $name)))
 	return false;
 
       return true;
@@ -93,7 +93,7 @@ class Database
   {
     $query = $this->db->prepare("SELECT * FROM plannings WHERE idUser = ?");
 
-    if(!$query->execute(array($_SESSION['idUser'])))
+    if (!$query->execute(array($_SESSION['idUser'])))
       return false;
 
     while($row = $query->fetch())
@@ -106,12 +106,12 @@ class Database
   {
     $query = $this->db->prepare("SELECT idUser, id FROM plannings WHERE name = ?");
 
-    if(!$query->execute(array($name)))
+    if (!$query->execute(array($name)))
       return false;
 
     $row = $query->fetch();
 
-    if($row['idUser'] != $_SESSION['idUser'])
+    if ($row['idUser'] != $_SESSION['idUser'])
       return false;
 
     return $row['id'];
@@ -121,10 +121,10 @@ class Database
   {
     $query = $this->db->prepare("SELECT members.name FROM plannings, members WHERE members.idPlanning = plannings.id AND plannings.id = ? ORDER BY members.id");
 
-    if(!$query->execute(array($_SESSION['currentPlanningId'])))
+    if (!$query->execute(array($_SESSION['currentPlanningId'])))
       return false;
 
-    if($query->rowCount() > 0)
+    if ($query->rowCount() > 0)
       while($row = $query->fetch())
 	$result[] = $row;
     else
@@ -140,11 +140,11 @@ class Database
     $queryCheck = $this->db->prepare("SELECT * FROM types WHERE name = ? AND idPlanning = ?");
     $queryCheck->execute(array($name, $_SESSION['currentPlanningId']));
 
-    if($queryCheck->rowCount() == 0)
+    if ($queryCheck->rowCount() == 0)
     {
       $query = $this->db->prepare("INSERT INTO types VALUES('', ?, ?, ?)");
 
-      if(!$query->execute(array($name, $color, $_SESSION['currentPlanningId'])))
+      if (!$query->execute(array($name, $color, $_SESSION['currentPlanningId'])))
 	return false;
 
       return $this->db->lastInsertId();
@@ -157,10 +157,10 @@ class Database
   {
     $query = $this->db->prepare("SELECT * FROM types WHERE idPlanning = ?");
 
-    if(!$query->execute(array($_SESSION['currentPlanningId'])))
+    if (!$query->execute(array($_SESSION['currentPlanningId'])))
       return false;
 
-    if($query->rowCount() > 0)
+    if ($query->rowCount() > 0)
       while($row = $query->fetch())
 	$result[] = $row;
     else
@@ -199,7 +199,7 @@ class Database
 
     $query = $this->db->prepare("INSERT INTO labels VALUES('', ?, ?, ?, ?, ?, ?)");
 
-    if(!$query->execute(array($comment, $color, $idMember['id'], $month, $day, $year)))
+    if (!$query->execute(array($comment, $color, $idMember['id'], $month, $day, $year)))
       return false;
 
     return true;
@@ -210,7 +210,7 @@ class Database
     $query = $this->db->prepare("SELECT members.name, idDay, color FROM members, labels, types WHERE types.id = labels.idType AND labels.idMember = members.id AND idYear = ? AND idMonth = ? AND members.idPlanning = ?");
     $query->execute(array($year, $month, $_SESSION['currentPlanningId']));
 
-    if($query->rowCount() > 0)
+    if ($query->rowCount() > 0)
       while($row = $query->fetch())
 	$result[$row['name']][$row['idDay']] = $row['color'];
     else
@@ -224,7 +224,7 @@ class Database
     $query = $this->db->prepare("SELECT * FROM labels, members WHERE members.name = ? AND members.id = labels.idMember AND members.idPlanning = ?");
     $query->execute(array($member, $_SESSION['currentPlanningId']));
 
-    if($query->rowCount() > 0)
+    if ($query->rowCount() > 0)
       while ($row = $query->fetch())
 	$result[$row['idYear']][$row['idMonth']][$row['idDay']] = $row['idType'];
     else
@@ -233,11 +233,21 @@ class Database
     return $result;
   }
 
+  public function getInfoPlanning()
+  {
+    $query = $this->db->prepare("SELECT date, message FROM plannings WHERE id = ?");
+    $query->execute(array($_SESSION['currentPlanningId']));
+
+    $result = $query->fetch();
+
+    return $result;
+  }
+
   public function getColorByType($name)
   {
     $query = $this->db->prepare("SELECT color FROM types WHERE name = ?");
 
-    if(!$query->execute(array($name)))
+    if (!$query->execute(array($name)))
       return false;
 
     $row = $query->fetch();
@@ -267,11 +277,11 @@ class Database
     $queryCheck = $this->db->prepare("SELECT * FROM members WHERE name = ? AND idPlanning = ?");
     $queryCheck->execute(array($name, $_SESSION['currentPlanningId']));
 
-    if($queryCheck->rowCount() == 0)
+    if ($queryCheck->rowCount() == 0)
     {
       $query = $this->db->prepare("INSERT INTO members VALUES('', ?, ?)");
 
-      if(!$query->execute(array($name, $_SESSION['currentPlanningId'])))
+      if (!$query->execute(array($name, $_SESSION['currentPlanningId'])))
 	return false;
 
       return true;

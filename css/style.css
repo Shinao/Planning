@@ -654,6 +654,13 @@ button.negative:active{
 {
   display: inline-block;
   height: 25px;
+  margin-left: 190px;
+  color: #898989;
+  font-family: 'Verdana',sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  text-shadow: 0 1px 0 #FFFFFF;
+  text-transform: uppercase;
 }
 
 #planning #text .planningTable .btnAction
