@@ -235,7 +235,7 @@ class Database
 
   public function getInfoPlanning()
   {
-    $query = $this->db->prepare("SELECT date, message FROM plannings WHERE id = ?");
+    $query = $this->db->prepare("SELECT name, date, message FROM plannings WHERE id = ?");
     $query->execute(array($_SESSION['currentPlanningId']));
 
     $result = $query->fetch();
@@ -332,6 +332,17 @@ class Database
     $query = $this->db->prepare("UPDATE members SET name = ? WHERE name = ? AND idPlanning = ?");
 
     $query->execute(array($name, $oldName, $_SESSION['currentPlanningId']));
+
+    return $query->rowCount();
+  }
+
+  public function messagePlanning($message)
+  {
+    $this->planningUpdated();
+
+    $query = $this->db->prepare("UPDATE plannings SET message = ? WHERE id = ?");
+
+    $query->execute(array($message, $_SESSION['currentPlanningId']));
 
     return $query->rowCount();
   }

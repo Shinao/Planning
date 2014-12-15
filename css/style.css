@@ -516,6 +516,8 @@ button.negative:active{
 #planning #text .headerPlanning td#messagePlanning
 {
   text-align: center;
+  line-height: 15px;
+  padding: 12px;
 }
 
 #planning #text .headerPlanning td.calendar

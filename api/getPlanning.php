@@ -38,7 +38,7 @@ if (isset($_SESSION['idUser'])){
 <div class="planningContainer">
 	<table class="headerPlanning">
 <tr>
-	<td class="calendar"><?php echo $_SESSION['currentPlanningName']; ?></td>
+	<td class="calendar"><?php echo $info['name']; ?></td>
 	<td class="month"><?php echo MoisFrancais($month)." ".$year; ?></td>
 	<td class="navig"><span id="btnPreviousMonth" class="btnNavigate raph"><</span><span id="btnThisMonth" class="btnNavigate text">AUJOURD'HUI</span><span id="btnNextMonth" class="btnNavigate raph">=</span></td>
 	</tr><?php if (!empty($info['message'])) {?><tr><td colspan=3 id="messagePlanning"><?php echo $info['message']; ?><td></tr><?php } ?></table><div id="legendPlanning">
