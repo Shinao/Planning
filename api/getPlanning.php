@@ -41,7 +41,7 @@ if (isset($_SESSION['idUser'])){
 	<td class="calendar"><?php echo $_SESSION['currentPlanningName']; ?></td>
 	<td class="month"><?php echo MoisFrancais($month)." ".$year; ?></td>
 	<td class="navig"><span id="btnPreviousMonth" class="btnNavigate raph"><</span><span id="btnThisMonth" class="btnNavigate text">AUJOURD'HUI</span><span id="btnNextMonth" class="btnNavigate raph">=</span></td>
-	</tr></table><div id="legendPlanning">
+	</tr><?php if (!empty($info['message'])) {?><tr><td colspan=3 id="messagePlanning"><?php echo $info['message']; ?><td></tr><?php } ?></table><div id="legendPlanning">
 	<div class="legendPlanningItem" data-id="-3"><span>Férié</span><br/><span class="ferrie itemLegendColor"></span></div><div class="legendPlanningItem" data-id="-2"><span>Week End</span><br/><span class="itemLegendColor we"></span></div><?php 
     if ($_SESSION['guest'] != "true") {
 	  echo "<div class=\"legendPlanningItem focused\" data-id=\"-1\"><span>Vide</span><br/><span class=\"itemLegendColor\"></span></div>"; }

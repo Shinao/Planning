@@ -513,6 +513,11 @@ button.negative:active{
   margin-top: -40px;
 }
 
+#planning #text .headerPlanning td#messagePlanning
+{
+  text-align: center;
+}
+
 #planning #text .headerPlanning td.calendar
 {
   text-align: left;
