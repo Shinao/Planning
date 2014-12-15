@@ -53,14 +53,14 @@ if (isset($_SESSION['idUser'])){
 	    }
 ?>
 </div>
-<table class="planningTable" cellspacing="0" style="width:100%">
+<table class="planningTable" cellspacing="0" >
 <thead>
 <tr class="titleDay titleColumnContainer rowTablePlanning"><td class=""></td>
 <?php
 	    for ($i = 1;$i < $nbDays+1;$i++)
 	    {
 ?>
-<td data-number="<?php echo $i; ?>" class="titleColumn" style="min-width: 14px; height:10px;"><?php echo $aJour[($iDay++ % 7)]; ?></td>
+<td data-number="<?php echo $i; ?>" class="titleColumn"><?php echo $aJour[($iDay++ % 7)]; ?></td>
 <?php
 	    }
 	    if($_SESSION['guest'] == 'false')
@@ -68,16 +68,16 @@ if (isset($_SESSION['idUser'])){
 ?>
 	</tr>
 	<tr class="titleColumnContainer rowTablePlanning">
-	<td class="nameMemberTitle" style="height:10px;">Nom</td>
+	<td class="nameMemberTitle">Nom</td>
 <?php
 	    for ($i = 1;$i < $nbDays+1;$i++)
 	    {
 ?>
-	<td class="dayNumber" data-number="<?php echo $i; ?>" class="titleColumn" style="min-width: 14px; height:10px;"><?php echo $i; ?></td>
+	<td class="dayNumber" data-number="<?php echo $i; ?>" class="titleColumn"><?php echo $i; ?></td>
 <?php
 	    }
 	    if($_SESSION['guest'] == 'false')
-	      echo '<td class="actionMemberTitle" style="width: 66px; height:10px;">Actions</td>';
+	      echo '<td class="actionMemberTitle">Actions</td>';
 ?>
 
 		</tr>
@@ -90,20 +90,19 @@ if (isset($_SESSION['idUser'])){
 	      {
 ?>
 <tr class="rowTablePlanning">
-<td class="nameMember" style="height:10px;"><?php echo $result[$i]['name']; ?></td>
+<td class="nameMember"><?php echo $result[$i]['name']; ?></td>
 <?php
 		$iDay = $siDay;
 		for ($j = 1;$j < $nbDays+1;$j++)
 		{
 ?>
 <td data-number="<?php echo $j."\""; if(isset($arrayLabel[$result[$i]['name']][$j])) { echo 'data-colorlabel=\''.$arrayLabel[$result[$i]['name']][$j].'\''; } ?> 
-class="dayField <?php if (isNotWorkable($j, $month)) echo 'ferrie '; else if (($iDay % 7) > 4) echo 'we'; ++$iDay; ?>" 
-style="min-width: 14px; height:10px;"></td>
+class="dayField <?php if (isNotWorkable($j, $month)) echo 'ferrie '; else if (($iDay % 7) > 4) echo 'we'; ++$iDay; ?>"></td>
 
 <?php
 		}
 		if($_SESSION['guest'] == 'false')
-		  echo '<td><span class="raph btnAction modifyMember" href="#" style="margin-left: -4px; margin-top: -1px;">a</span><span class="raph btnAction deleteMember" href="#">&Acirc;</span></td>';
+		  echo '<td><span class="raph btnAction modifyMember" href="#">a</span><span class="raph btnAction deleteMember" href="#">&Acirc;</span></td>';
 ?>
 </tr>
 <?php
@@ -112,7 +111,7 @@ style="min-width: 14px; height:10px;"></td>
 ?>
 						</tbody>
 						</table><div id="toolPlanning"><?php
-	    echo "<div class=\"toolPlanningPad\"><br/><span style=\"display: inline-block;height: 25px;\"> </span></div>";
+	    echo "<div class=\"toolPlanningPad\"><br/><span id=\"datePlanning\"\">TEST</span></div>";
 	    if($_SESSION['guest'] == 'false')
 	      echo '<span class="btnAddMember"><img class="resizedImgPlanning" src="img/user_add_32.png"/>Ajouter</span>';
 	    ?><span class="btnPrint"><img class="resizedImgPlanning" src="img/iconprint.png"/>Imprimer</span><span class="btnImage" enable="disable"><img class="resizedImgPlanning" src="img/imageicon.png"/>IMAGE</span><span class="btnPDF" enable="disable"><img class="resizedImgPlanning" src="img/pdficon.png"/>PDF</span></div></div><?php

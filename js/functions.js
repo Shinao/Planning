@@ -163,6 +163,11 @@ function loadEventPlanningCB(){
 
 function generateImage()
 {
+  $(".navig, .btnImage, .btnPDF, .btnPrint, .btnAddMember, .btnAction").css('visibility', 'hidden');
+  $(".rowTablePlanning td:last-child").css('display', 'none');
+  var legendFocused = $(".legendPlanningItem.focused");
+  legendFocused.removeClass('focused');
+
  html2canvas($("#planning"), {
    onrendered: function(canvas) {
   // canvas is the final rendered <canvas> element
@@ -173,11 +178,20 @@ function generateImage()
   link.download = 'Planning ' + $(".calendar").html() + " - " + $(".month").html() + '.png';
   link.href = myImage;
   link.click();
+
+  $(".navig, .btnImage, .btnPDF, .btnPrint, .btnAddMember, .btnAction").css('visibility', 'visible');
+  $(".rowTablePlanning td:last-child").css('display', 'table-cell');
+  legendFocused.addClass('focused');
   }});
 }
 
 function generatePDF()
 {
+  $(".navig, .btnImage, .btnPDF, .btnPrint, .btnAddMember, .btnAction").css('visibility', 'hidden');
+  $(".rowTablePlanning td:last-child").css('display', 'none');
+  var legendFocused = $(".legendPlanningItem.focused");
+  legendFocused.removeClass('focused');
+
  html2canvas($("#planning"), {
    onrendered: function(canvas) {
   // canvas is the final rendered <canvas> element
@@ -190,6 +204,10 @@ function generatePDF()
   var doc = new jsPDF('l', 'px', [canvas.width / ratio , canvas.height / ratio]);
   doc.addImage(myImage, 'JPEG', 0, 0, canvas.width / ratio , canvas.height / ratio);
   doc.save('Planning ' + $(".calendar").html() + " - " + $(".month").html() + '.pdf');
+
+  $(".navig, .btnImage, .btnPDF, .btnPrint, .btnAddMember, .btnAction").css('visibility', 'visible');
+  $(".rowTablePlanning td:last-child").css('display', 'table-cell');
+  legendFocused.addClass('focused');
   }
  });
 }

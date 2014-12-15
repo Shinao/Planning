@@ -639,6 +639,23 @@ button.negative:active{
   background: none repeat scroll 0 0 #FDFDFD;
 }
 
+#planning #text .planningTable .dayField
+{
+  width: 28px;
+  height: 29px;
+}
+
+#planning #text .planningTable .btnAction.modifyMember
+{
+  margin-left: -4px; margin-top: -1px;
+}
+
+#planning #text #datePlanning
+{
+  display: inline-block;
+  height: 25px;
+}
+
 #planning #text .planningTable .btnAction
 {
   border: 1px solid #DDDDDD;
@@ -658,6 +675,11 @@ button.negative:active{
   /* font-family: "Tahoma",sans-serif; */
   /* text-transform: uppercase; */
   cursor: pointer;
+}
+
+#planning #text .planningTable
+{
+  width: 100%;
 }
 
 #planning #text .planningTable .btnAction:hover
@@ -693,6 +715,18 @@ button.negative:active{
 {
   background-color: #0F1C25;
   cursor: pointer;
+}
+
+#planning #text .titleColumn
+{
+ min-width: 14px;
+ height:10px;
+}
+
+#planning #text td.actionMemberTitle
+{
+  width: 66px;
+  height:10px;
 }
 
 #planning #text td .actionContainer
