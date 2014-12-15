@@ -471,6 +471,7 @@ button.negative:active{
 {
   padding-right: 2px;
   padding-left: 8px;
+  width: 200px;
   float: left;
   border: none;
   border-radius: 0;

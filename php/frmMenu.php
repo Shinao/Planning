@@ -3,20 +3,14 @@ if(!isset($_SESSION))
   session_start();
 ?>
 <script type="text/javascript">
-function shadeColor1(color, percent) {  
-  var num = parseInt(color,16),
-    amt = Math.round(2.55 * percent),
-    R = (num >> 16) + amt,
-    G = (num >> 8 & 0x00FF) + amt,
-    B = (num & 0x0000FF) + amt;
-  return (0x1000000 + (R<255?R<1?0:R:255)*0x10000 + (G<255?G<1?0:G:255)*0x100 + (B<255?B<1?0:B:255)).toString(16).slice(1);
-}
-
-
-
-$().ready(function()
+$(document).ready(function()
 {
   loadPlannings();
+
+  $('#modifyPass').on('click', function()
+    {
+      loadDialog('dialogModifyPass');
+    });
 
   $('#btnDisconnect').click(function()
 {
@@ -139,6 +133,10 @@ $('#btnNew').click(function()
     <button type="submit" id="btnNew" class="standard">
 	<img src="img/page_table_32.png" class="resizedImgButton"/>
 	Nouveau
+    </button>
+	<button type="submit" id="modifyPass" class="standard">
+	<img src="img/textfield_key.png" class="verticalized"/>
+	Mots de passe
     </button>
 <?php
   }
