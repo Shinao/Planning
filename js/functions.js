@@ -104,19 +104,11 @@ function loadPlanning()
   }
   loadPlanning();
       });
-  $('span.btnImage').on('click', function()
-      {
-	generateImage();
-      });
-  $('span.btnPDF').on('click', function()
-      {
-	generatePDF();
-      });
-  $('span.btnPrint').on('click', function()
-      {
-	window.print();
-	// $('div.planningContainer').printElement({printMode:'popup', pageTitle: 'Planning', leaveOpen: true, overrideElementCSS:['css/printPlanning.css', 'css/cssreset.css']});
-      });
+  $('span.btnImage').on('click', function() { generateImage(); });
+  $('span.btnPDF').on('click', function() { generatePDF(); });
+  $('span.btnExport').on('click', function() { exportPlanning(); });
+  $('span.btnImport').on('click', function() { importPlanning(); });
+  // $('span.btnPrint').on('click', function() { window.print(); });
       });
 }
 
@@ -163,7 +155,7 @@ function loadEventPlanningCB(){
 
 function generateImage()
 {
-  $(".navig, .btnImage, .btnPDF, .btnPrint, .btnAddMember, .btnAction").css('visibility', 'hidden');
+  $(".navig, .btnTool, .btnAction").css('visibility', 'hidden');
   $(".rowTablePlanning td:last-child").css('display', 'none');
   var legendFocused = $(".legendPlanningItem.focused");
   legendFocused.removeClass('focused');
@@ -179,7 +171,7 @@ function generateImage()
   link.href = myImage;
   link.click();
 
-  $(".navig, .btnImage, .btnPDF, .btnPrint, .btnAddMember, .btnAction").css('visibility', 'visible');
+  $(".navig, .btnTool, .btnAction").css('visibility', 'visible');
   $(".rowTablePlanning td:last-child").css('display', 'table-cell');
   legendFocused.addClass('focused');
   }});
@@ -187,7 +179,7 @@ function generateImage()
 
 function generatePDF()
 {
-  $(".navig, .btnImage, .btnPDF, .btnPrint, .btnAddMember, .btnAction").css('visibility', 'hidden');
+  $(".navig, .btnTool, .btnAction").css('visibility', 'hidden');
   $(".rowTablePlanning td:last-child").css('display', 'none');
   var legendFocused = $(".legendPlanningItem.focused");
   legendFocused.removeClass('focused');
@@ -205,9 +197,20 @@ function generatePDF()
   doc.addImage(myImage, 'JPEG', 0, 0, canvas.width / ratio , canvas.height / ratio);
   doc.save('Planning ' + $(".calendar").html() + " - " + $(".month").html() + '.pdf');
 
-  $(".navig, .btnImage, .btnPDF, .btnPrint, .btnAddMember, .btnAction").css('visibility', 'visible');
+  $(".navig, .btnTool, .btnAction").css('visibility', 'visible');
   $(".rowTablePlanning td:last-child").css('display', 'table-cell');
   legendFocused.addClass('focused');
   }
  });
+}
+
+function exportPlanning()
+{
+  $.get('api/export.php', function(data)
+      {
+      });
+}
+
+function importPlanning()
+{
 }
