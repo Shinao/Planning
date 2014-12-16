@@ -169,19 +169,19 @@ class Database
     return $result;
   }
 
-  public function deleteType($name)
+  public function deleteType($id)
   {
     $this->planningUpdated();
 
-    $query = $this->db->prepare("SELECT id FROM types WHERE name = ? AND idPlanning = ?");
-    $query->execute(array($name, $_SESSION['currentPlanningId']));
-    $id = $query->fetch()['id'];
+    // $query = $this->db->prepare("SELECT id FROM types WHERE name = ? AND idPlanning = ?");
+    // $query->execute(array($name, $_SESSION['currentPlanningId']));
+    // $id = $query->fetch()['id'];
 
-    $query = $this->db->prepare("DELETE FROM types WHERE name = ? AND idPlanning = ?");
-    $query->execute(array($name, $_SESSION['currentPlanningId']));
+    $query = $this->db->prepare("DELETE FROM types WHERE id = ? AND idPlanning = ?");
+    $query->execute(array($id, $_SESSION['currentPlanningId']));
 
-    $query = $this->db->prepare("DELETE FROM labels WHERE idType = ?");
-    $query->execute(array($id));
+    $clean = $this->db->prepare("DELETE FROM labels WHERE idType = ?");
+    $clean->execute(array($id));
 
     return $query->rowCount();
   }
@@ -358,13 +358,13 @@ class Database
     return $query->rowCount();
   }
 
-  public function modifyType($name, $oldName, $color)
+  public function modifyType($name, $id, $color)
   {
     $this->planningUpdated();
 
-    $query = $this->db->prepare("UPDATE types SET name = ?, color = ? WHERE name = ? AND idPlanning = ?");
+    $query = $this->db->prepare("UPDATE types SET name = ?, color = ? WHERE id = ? AND idPlanning = ?");
 
-    $query->execute(array($name, $color, $oldName, $_SESSION['currentPlanningId']));
+    $query->execute(array($name, $color, $id, $_SESSION['currentPlanningId']));
 
     return $query->rowCount();
   }

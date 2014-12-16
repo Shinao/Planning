@@ -22,7 +22,7 @@ $(document).ready(function () {
   {
     type: "POST",
       url: "api/modifyType.php?name=" + $("#nameType").val()
-      + "&oldName="+ $('.legendPlanningItem.focused').children().eq(0).html()
+      + "&id="+ $('.legendPlanningItem.focused').data('id')
       + "&color=" + encodeURIComponent(colorType),
     success: function(xml)
   {
@@ -42,13 +42,14 @@ $(document).ready(function () {
 
   $('#delType').on('click', function()
     {
-      $.get('api/delType.php?name='+$(".legendPlanningItem.focused").children().eq(0).html(), function(data)
+      $.get('api/delType.php?id='+$(".legendPlanningItem.focused").data('id'), function(data)
     {
       var racine = data.firstChild;
       if (racine.nodeName == "success")
       {
+	var prev = $(".legendPlanningItem.focused").prev();
 	$(".legendPlanningItem.focused").remove();
-	$(".legendPlanningItem").eq(0).addClass("focused");
+	prev.addClass('focused');
       }
       else if (racine.nodeName == "error")
       {
@@ -63,7 +64,8 @@ $(document).ready(function () {
 	var racine = data.firstChild;
 	if (racine.nodeName == "success")
 	{
-	  $('.legendPlanningItem').last().after('<div class=\'legendPlanningItem\' data-id=\''+racine.firstChild.nodeValue+'\'><span>'+$("#nameType").val()+'</span><br><span class=\'itemLegendColor\' style=\'background-color: '+colorType+';\'></span></div>');
+	  $('.legendPlanningItem.focused').removeClass('focused');
+	  $('.legendPlanningItem').last().after('<div class=\'legendPlanningItem focused\' data-id=\''+racine.firstChild.nodeValue+'\'><span>'+$("#nameType").val()+'</span><br><span class=\'itemLegendColor\' style=\'background-color: '+colorType+';\'></span></div>');
 	  $('#toolNavbarContainer').animate({width: 'toggle'}, "slow");
 	  $('#navbar ul li.focused').removeClass('focused');
 	}

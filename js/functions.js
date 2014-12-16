@@ -25,7 +25,7 @@ function loadPlannings()
     plannings.push(data[i]['name']);
   }
   $("#planningCombobox").jqxDropDownList({ source: plannings, 
-    selectedIndex: 0, width: '200px', height: '25px', theme: 'orange', 
+    selectedIndex: 0, width: '150px', height: '25px', theme: 'orange', 
     autoDropDownHeight: 'true' });
   $("#planningCombobox").jqxDropDownList('disableAt', 0);
   loadEventPlanningCB();

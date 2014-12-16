@@ -1,15 +1,15 @@
 <?php
-	session_start();
+session_start();
 
-	header('content-type:text/xml;charset=utf-8');
+header('content-type:text/xml;charset=utf-8');
 
-	require '../class/Database.class.php';
+require '../class/Database.class.php';
 
-	$name = $_REQUEST['name'];
+$id = $_REQUEST['id'];
 
-    $db = new Database();
+$db = new Database();
 
-    $result = $db->deleteType($name);
+$result = $db->deleteType($id);
 
-    echo $result > 0 ? '<success></success>' : '<error>Impossible de supprimer le type correspondant</error>';
+echo $result > 0 ? '<success></success>' : '<error>Impossible de supprimer le type correspondant</error>';
 ?>
