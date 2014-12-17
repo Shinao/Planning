@@ -206,7 +206,7 @@ function generatePDF()
 
 function exportPlanning()
 {
-  $.get('api/export.php', function(data)
+  $.get('api/export.php?year='+year+'&month='+month, function(data)
       {
       });
 }
