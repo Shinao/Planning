@@ -30,10 +30,8 @@ if (isset($_SESSION['idUser'])){
 
   $nbDays = cal_days_in_month(CAL_GREGORIAN, $month , $year);
 
-  if($result != false)
-  {
-    $siDay = date("w", mktime (0, 0, 0, $month, 0, $year));
-    $iDay = $siDay;
+  $siDay = date("w", mktime (0, 0, 0, $month, 0, $year));
+  $iDay = $siDay;
 ?>
 <div class="planningContainer">
 	<table class="headerPlanning">
@@ -85,19 +83,17 @@ if (isset($_SESSION['idUser'])){
 	</thead>
 	<tbody>
 <?php
-	    if($result[0] != "null")
+	    foreach ($result as $member)
 	    {
-	      for ($i = 0;$i < sizeof($result);$i++)
-	      {
 ?>
 <tr class="rowTablePlanning">
-<td class="nameMember"><?php echo $result[$i]['name']; ?></td>
+<td class="nameMember"><?php echo $member['name']; ?></td>
 <?php
 		$iDay = $siDay;
 		for ($j = 1;$j < $nbDays+1;$j++)
 		{
 ?>
-<td data-number="<?php echo $j."\""; if(isset($arrayLabel[$result[$i]['name']][$j])) { echo 'data-colorlabel=\''.$arrayLabel[$result[$i]['name']][$j].'\''; } ?> 
+<td data-number="<?php echo $j."\""; if(isset($arrayLabel[$member['name']][$j])) { echo 'data-colorlabel=\''.$arrayLabel[$member['name']][$j].'\''; } ?> 
 class="dayField <?php if (isNotWorkable($j, $month)) echo 'ferrie '; else if (($iDay % 7) > 4) echo 'we'; ++$iDay; ?>"></td>
 
 <?php
@@ -107,7 +103,6 @@ class="dayField <?php if (isNotWorkable($j, $month)) echo 'ferrie '; else if (($
 ?>
 </tr>
 <?php
-	      }
 	    }
 ?>
 						</tbody>
@@ -116,8 +111,6 @@ class="dayField <?php if (isNotWorkable($j, $month)) echo 'ferrie '; else if (($
 	    if($_SESSION['guest'] == 'false')
 	      echo '<span class="btnTool btnAddMember"><img class="resizedImgPlanning" src="img/user_add_32.png"/>Ajouter</span>';
 	    ?><span class="btnTool btnImage" enable="disable"><img class="resizedImgPlanning" src="img/imageicon.png"/>IMAGE</span><span class="btnTool btnPDF" enable="disable"><img class="resizedImgPlanning" src="img/pdficon.png"/>PDF</span><span class="btnTool btnImportExport" enable="disable"><img class="resizedImgPlanning" src="img/import.png"/>Importer/Exporter</span></div></div><?php
-  } else
     // <span class="btnTool btnPrint"><img class="resizedImgPlanning" src="img/iconprint.png"/>Imprimer</span>
-    echo 'Erreur lors de la recherche du planning';
 }
 ?>

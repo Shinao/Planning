@@ -73,12 +73,12 @@ class Database
 
   public function createPlanning($name)
   {
-    $queryCheck = $this->db->prepare("SELECT * FROM plannings WHERE name = ?");
-    $queryCheck->execute(array($name));
+    $queryCheck = $this->db->prepare("SELECT * FROM plannings WHERE name = ? AND idUser = ?");
+    $queryCheck->execute(array($name, $_SESSION['idUser']));
 
     if ($queryCheck->rowCount() == 0)
     {
-      $query = $this->db->prepare("INSERT INTO plannings VALUES('', CURDATE(), ?, ?)");
+      $query = $this->db->prepare("INSERT INTO plannings VALUES('', CURDATE(), ?, ?, '')");
 
       if (!$query->execute(array($_SESSION['idUser'], $name)))
 	return false;
@@ -128,7 +128,7 @@ class Database
       while($row = $query->fetch())
 	$result[] = $row;
     else
-      $result[0] = "null";
+      $result = [];
 
     return $result;
   }
@@ -144,7 +144,7 @@ class Database
       while($row = $query->fetch())
 	$result[] = $row;
     else
-      $result[0] = "null";
+      $result = [];
 
     return $result;
   }
@@ -171,7 +171,7 @@ class Database
 
   public function getTypes()
   {
-    $query = $this->db->prepare("SELECT * FROM types WHERE idPlanning = ?");
+    $query = $this->db->prepare("SELECT * FROM types WHERE idPlanning = ? ORDER BY id");
 
     if (!$query->execute(array($_SESSION['currentPlanningId'])))
       return false;
@@ -266,9 +266,9 @@ class Database
 
   public function getColorByType($name)
   {
-    $query = $this->db->prepare("SELECT color FROM types WHERE name = ?");
+    $query = $this->db->prepare("SELECT color FROM types WHERE name = ? AND idPlanning = ?");
 
-    if (!$query->execute(array($name)))
+    if (!$query->execute(array($name, $_SESSION['currentPlanningId'])))
       return false;
 
     $row = $query->fetch();
@@ -280,13 +280,13 @@ class Database
   {
     $this->planningUpdated();
 
-    $queryIdMember = $this->db->prepare("SELECT id FROM members WHERE name = ?");
-    $queryIdMember->execute(array($member));
+    $queryIdMember = $this->db->prepare("SELECT id FROM members WHERE name = ? AND idPlanning = ?");
+    $queryIdMember->execute(array($member, $_SESSION['currentPlanningId']));
     $idMember = $queryIdMember->fetch();
 
-    $query = $this->db->prepare("DELETE FROM labels WHERE idMember = ? AND idYear = ? AND idMonth = ? AND idDay = ?");
+    $query = $this->db->prepare("DELETE FROM labels WHERE idMember = ? AND idYear = ? AND idMonth = ? AND idDay = ? AND idPlanning = ?");
 
-    $query->execute(array($idMember['id'], $year, $month, $day));
+    $query->execute(array($idMember['id'], $year, $month, $day, $_SESSION['currentPlanningId']));
 
     return $query->rowCount();
   }
@@ -392,8 +392,9 @@ class Database
 
   public function deletePlanning()
   {
-    $query = $this->db->prepare("DELETE FROM plannings WHERE id = ?");
+    $this->cleanPlanning();
 
+    $query = $this->db->prepare("DELETE FROM plannings WHERE id = ?");
     $query->execute(array($_SESSION['currentPlanningId']));
 
     return $query->rowCount();
@@ -413,7 +414,7 @@ class Database
     return $result;
   }
 
-  public function importPlanning($data)
+  public function cleanPlanning()
   {
     // Clean planning
     $query = $this->db->prepare("DELETE FROM types WHERE idPlanning = ?");
@@ -422,6 +423,11 @@ class Database
     $query->execute(array($_SESSION['currentPlanningId']));
     $query = $this->db->prepare("DELETE FROM members WHERE idPlanning = ?");
     $query->execute(array($_SESSION['currentPlanningId']));
+  }
+
+  public function importPlanning($data)
+  {
+    $this->cleanPlanning();
 
     // Insert new planning
     // Add each members
