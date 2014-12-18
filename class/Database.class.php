@@ -117,6 +117,22 @@ class Database
     return $row['id'];
   }
 
+  public function getMembers()
+  {
+    $query = $this->db->prepare("SELECT * FROM members WHERE idPlanning = ? ORDER BY id");
+
+    if (!$query->execute(array($_SESSION['currentPlanningId'])))
+      return false;
+
+    if ($query->rowCount() > 0)
+      while($row = $query->fetch())
+	$result[] = $row;
+    else
+      $result[0] = "null";
+
+    return $result;
+  }
+
   public function getMembersByPlanning()
   {
     $query = $this->db->prepare("SELECT members.name FROM plannings, members WHERE members.idPlanning = plannings.id AND plannings.id = ? ORDER BY members.id");
@@ -186,23 +202,28 @@ class Database
     return $query->rowCount();
   }
 
-  public function addLabel($comment, $color, $member, $day, $month, $year)
+  public function addLabelById($comment, $color, $member, $day, $month, $year)
   {
     $this->planningUpdated();
 
+    $queryExist = $this->db->prepare("DELETE FROM labels WHERE idMember = ? AND idDay = ? AND idMonth = ? AND idYear = ?");
+    $queryExist->execute(array($member, $day, $month, $year));
+
+    $query = $this->db->prepare("INSERT INTO labels VALUES('', ?, ?, ?, ?, ?, ?, ?)");
+
+    if (!$query->execute(array($comment, $color, $member, $month, $day, $year, $_SESSION['currentPlanningId'])))
+      return false;
+
+    return true;
+  }
+
+  public function addLabel($comment, $color, $member, $day, $month, $year)
+  {
     $queryIdMember = $this->db->prepare("SELECT id FROM members WHERE name = ? AND idPlanning = ?");
     $queryIdMember->execute(array($member, $_SESSION['currentPlanningId']));
     $idMember = $queryIdMember->fetch();
 
-    $queryExist = $this->db->prepare("DELETE FROM labels WHERE idMember = ? AND idDay = ? AND idMonth = ? AND idYear = ?");
-    $queryExist->execute(array($idMember['id'], $day, $month, $year));
-
-    $query = $this->db->prepare("INSERT INTO labels VALUES('', ?, ?, ?, ?, ?, ?)");
-
-    if (!$query->execute(array($comment, $color, $idMember['id'], $month, $day, $year)))
-      return false;
-
-    return true;
+    return ($this->addLabelById($comment, $color, $idMember['id'], $day, $month, $year));
   }
 
   public function getLabels($month, $year)
@@ -378,6 +399,48 @@ class Database
     return $query->rowCount();
   }
 
+  public function getAllLabels()
+  {
+    $query = $this->db->prepare("SELECT * FROM labels WHERE idPlanning = ?");
+    $query->execute(array($_SESSION['currentPlanningId']));
+
+    if ($query->rowCount() > 0)
+      while($row = $query->fetch())
+	$result[] = $row;
+    else
+      $result = [];
+
+    return $result;
+  }
+
+  public function importPlanning($data)
+  {
+    // Clean planning
+    $query = $this->db->prepare("DELETE FROM types WHERE idPlanning = ?");
+    $query->execute(array($_SESSION['currentPlanningId']));
+    $query = $this->db->prepare("DELETE FROM labels WHERE idPlanning = ?");
+    $query->execute(array($_SESSION['currentPlanningId']));
+    $query = $this->db->prepare("DELETE FROM members WHERE idPlanning = ?");
+    $query->execute(array($_SESSION['currentPlanningId']));
+
+    // Insert new planning
+    // Add each members
+    foreach ($data['members'] as $member)
+    {
+      $this->addMember($member['name']);
+      echo $member['id'] . " - " . $member['name'] . '<br>';
+      $memberToId[$member['id']] = $this->db->lastInsertId();
+    }
+    // Add each types
+    foreach ($data['types'] as $type)
+    {
+      $this->addType($type['name'], $type['color']);
+      $typeToId[$type['id']] = $this->db->lastInsertId();
+    }
+    // Add labels with associeted new type and member
+    foreach ($data['labels'] as $label)
+      $this->addLabelById("", $typeToId[$label['idType']], $memberToId[$label['idMember']], $label['idDay'], $label['idMonth'], $label['idYear']);
+  }
 }
 
 ?>

@@ -38,7 +38,7 @@ $().ready(function()
       },
 	close: function() {
 	}
-  }).draggable();
+  });
 });
 </script>
 <div id="dialogDeletePlanning" class="ui-widget" title="Suppression du Planning">

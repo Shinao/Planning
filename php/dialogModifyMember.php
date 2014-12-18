@@ -33,7 +33,7 @@ $().ready(function()
       },
 	close: function() {
 	}
-  }).draggable();
+  });
 });
 </script>
 <div id="dialogModifyMember" class="ui-widget" title="Modifier une personne">

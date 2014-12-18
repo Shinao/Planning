@@ -32,7 +32,7 @@ $().ready(function()
       },
 	close: function() {
 	}
-  }).draggable();
+  });
 });
 </script>
 <div id="dialogModifyPass" class="ui-widget" title="Modifier compte invit&eacute;">

@@ -6,13 +6,10 @@ if (!isset($_SESSION['idUser']))
 
 require '../class/Database.class.php';
 
-$month = $_REQUEST['month'];
-$year = $_REQUEST['year'];
-
 $db = Database::getInstance();
 $info = $db->getInfoPlanning();
-$members = $db->getMembersByPlanning();
-$labels = $db->getLabels($month, $year);
+$members = $db->getMembers();
+$labels = $db->getAllLabels();
 $types = $db->getTypes();
 
 $data['info'] = $info;
@@ -24,7 +21,7 @@ $json = json_encode($data);
 
 header('Content-Description: File Transfer');
 header('Content-Type: application/octet-stream');
-header('Content-Disposition: attachment; filename='. $info['name'] . '.txt');
+header('Content-Disposition: attachment; filename='. $info['name'] . '.json');
 header('Expires: 0');
 header('Cache-Control: must-revalidate');
 header('Pragma: public');

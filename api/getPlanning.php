@@ -115,7 +115,7 @@ class="dayField <?php if (isNotWorkable($j, $month)) echo 'ferrie '; else if (($
 	    echo "<div class=\"toolPlanningPad\"><br/><span id=\"datePlanning\"\">MODIFI&eacute; LE " . date('d/m/Y', strtotime($info['date'])) . "</span></div>";
 	    if($_SESSION['guest'] == 'false')
 	      echo '<span class="btnTool btnAddMember"><img class="resizedImgPlanning" src="img/user_add_32.png"/>Ajouter</span>';
-	    ?><span class="btnTool btnImage" enable="disable"><img class="resizedImgPlanning" src="img/imageicon.png"/>IMAGE</span><span class="btnTool btnPDF" enable="disable"><img class="resizedImgPlanning" src="img/pdficon.png"/>PDF</span><span class="btnTool btnImport" enable="disable"><img class="resizedImgPlanning" src="img/import.png"/>Importer</span><span class="btnTool btnExport" enable="disable"><img class="resizedImgPlanning" src="img/export.png"/>Exporter</span></div></div><?php
+	    ?><span class="btnTool btnImage" enable="disable"><img class="resizedImgPlanning" src="img/imageicon.png"/>IMAGE</span><span class="btnTool btnPDF" enable="disable"><img class="resizedImgPlanning" src="img/pdficon.png"/>PDF</span><span class="btnTool btnImportExport" enable="disable"><img class="resizedImgPlanning" src="img/import.png"/>Importer/Exporter</span></div></div><?php
   } else
     // <span class="btnTool btnPrint"><img class="resizedImgPlanning" src="img/iconprint.png"/>Imprimer</span>
     echo 'Erreur lors de la recherche du planning';

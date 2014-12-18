@@ -106,8 +106,7 @@ function loadPlanning()
       });
   $('span.btnImage').on('click', function() { generateImage(); });
   $('span.btnPDF').on('click', function() { generatePDF(); });
-  $('span.btnExport').on('click', function() { exportPlanning(); });
-  $('span.btnImport').on('click', function() { importPlanning(); });
+  $('span.btnImportExport').on('click', function() { loadDialog('dialogImportExport'); });
   // $('span.btnPrint').on('click', function() { window.print(); });
       });
 }
@@ -160,21 +159,21 @@ function generateImage()
   var legendFocused = $(".legendPlanningItem.focused");
   legendFocused.removeClass('focused');
 
- html2canvas($("#planning"), {
-   onrendered: function(canvas) {
-  // canvas is the final rendered <canvas> element
-  canvas.name = "test";
-  // var myImage = canvas.toDataURL("image/JPEG").slice('data:image/jpeg;base64,'.length);
-  var myImage = canvas.toDataURL("image/PNG");
-  var link = document.createElement('a');
-  link.download = 'Planning ' + $(".calendar").html() + " - " + $(".month").html() + '.png';
-  link.href = myImage;
-  link.click();
+  html2canvas($("#planning"), {
+    onrendered: function(canvas) {
+		  // canvas is the final rendered <canvas> element
+		  canvas.name = "test";
+		  // var myImage = canvas.toDataURL("image/JPEG").slice('data:image/jpeg;base64,'.length);
+		  var myImage = canvas.toDataURL("image/PNG");
+		  var link = document.createElement('a');
+		  link.download = 'Planning ' + $(".calendar").html() + " - " + $(".month").html() + '.png';
+		  link.href = myImage;
+		  link.click();
 
-  $(".navig, .btnTool, .btnAction").css('visibility', 'visible');
-  $(".rowTablePlanning td:last-child").css('display', 'table-cell');
-  legendFocused.addClass('focused');
-  }});
+		  $(".navig, .btnTool, .btnAction").css('visibility', 'visible');
+		  $(".rowTablePlanning td:last-child").css('display', 'table-cell');
+		  legendFocused.addClass('focused');
+		}});
 }
 
 function generatePDF()
@@ -184,14 +183,14 @@ function generatePDF()
   var legendFocused = $(".legendPlanningItem.focused");
   legendFocused.removeClass('focused');
 
- html2canvas($("#planning"), {
-   onrendered: function(canvas) {
-  // canvas is the final rendered <canvas> element
-  var myImage = canvas.toDataURL("image/PNG").slice('data:image/png;base64,'.length);
-  // Convert the data to binary form
-  myImage = atob(myImage)
-  //new object of jspdf and save image to pdf.
-  console.log(canvas);
+  html2canvas($("#planning"), {
+    onrendered: function(canvas) {
+		  // canvas is the final rendered <canvas> element
+		  var myImage = canvas.toDataURL("image/PNG").slice('data:image/png;base64,'.length);
+		  // Convert the data to binary form
+		  myImage = atob(myImage)
+    //new object of jspdf and save image to pdf.
+    console.log(canvas);
   var ratio = 1.5;
   var doc = new jsPDF('l', 'px', [canvas.width / ratio , canvas.height / ratio]);
   doc.addImage(myImage, 'JPEG', 0, 0, canvas.width / ratio , canvas.height / ratio);
@@ -200,17 +199,6 @@ function generatePDF()
   $(".navig, .btnTool, .btnAction").css('visibility', 'visible');
   $(".rowTablePlanning td:last-child").css('display', 'table-cell');
   legendFocused.addClass('focused');
-  }
- });
-}
-
-function exportPlanning()
-{
-  $.get('api/export.php?year='+year+'&month='+month, function(data)
-      {
-      });
-}
-
-function importPlanning()
-{
+		}
+  });
 }

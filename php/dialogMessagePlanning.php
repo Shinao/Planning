@@ -35,7 +35,7 @@ $().ready(function()
       },
 	close: function() {
 	}
-  }).draggable();
+  });
 });
 </script>
 <div id="dialogMessagePlanning" class="ui-widget" title="Modifier le message du Planning">

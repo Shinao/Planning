@@ -567,7 +567,7 @@ button.negative:active{
   padding: 4px 8px;
 }
 
-#planning #text .btnTool
+.btnTool
 {
   -moz-user-select: none;
   margin: 13px 4px 0 4px;
@@ -592,9 +592,14 @@ button.negative:active{
   float: left;
 }
 
-#planning #text .btnPrint, #planning #text .btnPDF, #planning #text .btnImage, #planning #text .btnExport, #planning #text .btnImport, #planning #text .btnExport
+#planning #text .btnPrint, #planning #text .btnPDF, #planning #text .btnImage, .btnImportExport
 {
   float: right;
+}
+
+#dialogImportExport
+{
+  text-align: center;
 }
 
 #planning #text .btnNavigate.text
@@ -604,7 +609,7 @@ button.negative:active{
   vertical-align: bottom;
 }
 
-#planning #text .btnNavigate:hover, #planning #text .btnTool:hover
+#planning #text .btnNavigate:hover, .btnTool:hover
 {
   background: none repeat scroll 0 0 #F7F7F7;
   cursor: pointer;

@@ -34,7 +34,7 @@ $().ready(function()
       },
 	close: function() {
 	}
-  }).draggable();
+  });
 });
 </script>
 <div id="dialogModifyPlanning" class="ui-widget" title="Modifier le nom du Planning">

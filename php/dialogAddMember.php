@@ -28,7 +28,7 @@ $().ready(function()
       },
 	close: function() {
 	}
-  }).draggable();
+  });
 });
 </script>
 <div id="dialogAddMember" class="ui-widget" title="Ajouter une personne">

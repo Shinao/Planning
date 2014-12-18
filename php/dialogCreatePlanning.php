@@ -32,7 +32,7 @@ $().ready(function()
       },
 	close: function() {
 	}
-  }).draggable();
+  });
 });
 </script>
 <div id="dialogCreatePlanning" class="ui-widget" title="Creer un nouveau planning">
