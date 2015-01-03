@@ -119,7 +119,7 @@ class Database
 
   public function getMembers()
   {
-    $query = $this->db->prepare("SELECT * FROM members WHERE idPlanning = ? ORDER BY id");
+    $query = $this->db->prepare("SELECT * FROM members WHERE idPlanning = ? ORDER BY sort");
 
     if (!$query->execute(array($_SESSION['currentPlanningId'])))
       return false;
@@ -135,7 +135,7 @@ class Database
 
   public function getMembersByPlanning()
   {
-    $query = $this->db->prepare("SELECT members.name FROM plannings, members WHERE members.idPlanning = plannings.id AND plannings.id = ? ORDER BY members.id");
+    $query = $this->db->prepare("SELECT members.name FROM plannings, members WHERE members.idPlanning = plannings.id AND plannings.id = ? ORDER BY members.sort");
 
     if (!$query->execute(array($_SESSION['currentPlanningId'])))
       return false;
@@ -300,9 +300,13 @@ class Database
 
     if ($queryCheck->rowCount() == 0)
     {
-      $query = $this->db->prepare("INSERT INTO members VALUES('', ?, ?)");
+      $query = $this->db->prepare("SELECT COUNT(*) FROM members WHERE idPlanning = ?");
+      $query->execute(array($_SESSION['currentPlanningId']));
+      $sort = $query->fetch()[0];
 
-      if (!$query->execute(array($name, $_SESSION['currentPlanningId'])))
+      $query = $this->db->prepare("INSERT INTO members VALUES('', ?, ?, ?)");
+
+      if (!$query->execute(array($name, $_SESSION['currentPlanningId'], $sort)))
 	return false;
 
       return true;
@@ -410,6 +414,22 @@ class Database
 	$result[] = $row;
     else
       $result = [];
+
+    return $result;
+  }
+
+  public function sortMember($name, $old_index, $new_index)
+  {
+    $this->planningUpdated();
+
+    if ($new_index > $old_index)
+      $query = $this->db->prepare("UPDATE members SET sort = sort - 1 WHERE sort <= ? AND sort >= ? AND idPlanning = ?");
+    else
+      $query = $this->db->prepare("UPDATE members SET sort = sort + 1 WHERE sort >= ? AND sort <= ? AND idPlanning = ?");
+    $query->execute(array($new_index, $old_index, $_SESSION['currentPlanningId']));
+
+    $query = $this->db->prepare("UPDATE members SET sort = ? WHERE name = ? AND idPlanning = ?");
+    $query->execute(array($new_index, $name, $_SESSION['currentPlanningId']));
 
     return $result;
   }

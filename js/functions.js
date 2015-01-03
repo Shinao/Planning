@@ -118,11 +118,12 @@ function loadPlanning()
     onDrop: function ($item, container, _super, event) {
       $item.removeClass("dragged").removeAttr("style");
       $("body").removeClass("dragging");
-      console.log($item);
-      console.log(container);
-      console.log("Drop");
+
       console.log(index_start_sort);
       console.log($item.index());
+
+      if (index_start_sort != $item.index())
+    $.get('api/sortMember.php?name='+$item.children().eq(0).html()+'&oldindex='+index_start_sort+'&newindex='+$item.index());
     },
     onDragStart: function ($item, container, _super, event) {
 	$item.css({
