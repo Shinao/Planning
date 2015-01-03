@@ -319,8 +319,14 @@ class Database
   {
     $this->planningUpdated();
 
-    $query = $this->db->prepare("DELETE FROM members WHERE name = ? AND idPlanning = ?");
+    $query = $this->db->prepare("SELECT sort FROM members WHERE name = ? AND idPlanning = ?");
+    $query->execute(array($name, $_SESSION['currentPlanningId']));
+    $index = $query->fetch()[0];
 
+    $query = $this->db->prepare("UPDATE members SET sort = sort - 1 WHERE sort > ? AND idPlanning = ?");
+    $query->execute(array($index, $_SESSION['currentPlanningId']));
+
+    $query = $this->db->prepare("DELETE FROM members WHERE name = ? AND idPlanning = ?");
     $query->execute(array($name, $_SESSION['currentPlanningId']));
 
     return $query->rowCount();
