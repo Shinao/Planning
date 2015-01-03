@@ -108,6 +108,32 @@ function loadPlanning()
   $('span.btnPDF').on('click', function() { generatePDF(); });
   $('span.btnImportExport').on('click', function() { loadDialog('dialogImportExport'); });
   // $('span.btnPrint').on('click', function() { window.print(); });
+
+  $('.planningTable').sortable({
+    containerSelector: 'table',
+    itemPath: '> tbody',
+    itemSelector: 'tr',
+    handle: 'span.btnAction.sort',
+    placeholder: '<tr class="placeholder"/>',
+    onDrop: function ($item, container, _super, event) {
+      $item.removeClass("dragged").removeAttr("style");
+      $("body").removeClass("dragging");
+      console.log($item);
+      console.log(container);
+      console.log("Drop");
+      console.log(index_start_sort);
+      console.log($item.index());
+    },
+    onDragStart: function ($item, container, _super, event) {
+	$item.css({
+	  height: $item.height(),
+	width: $item.width()
+	})
+	$item.addClass("dragged")
+	  $("body").addClass("dragging")
+	  index_start_sort = $item.index();
+	 }
+  });
       });
 }
 

@@ -697,6 +697,12 @@ button.negative:active{
   cursor: pointer;
 }
 
+#planning #text .planningTable .btnAction.sort
+{
+  padding: 0 10px;
+  padding-top: 10px;
+}
+
 #planning #text .planningTable
 {
   width: 100%;
@@ -708,9 +714,15 @@ button.negative:active{
   background: none repeat-x scroll 0 0 #EBEBEB;
 }
 
+#planning #text .planningTable tr.placeholder
+{
+  height: 1px;
+}
+
 #planning #text .planningTable tr.rowTablePlanning
 {
   border-bottom: 1px solid #EBEBEB;
+  background-color: #777777;
 }
 
 #planning #text .planningTable tr.rowTablePlanning:last-child
@@ -745,7 +757,7 @@ button.negative:active{
 
 #planning #text td.actionMemberTitle
 {
-  width: 66px;
+  width: 94px;
   height:10px;
 }
 

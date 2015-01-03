@@ -99,7 +99,7 @@ class="dayField <?php if (isNotWorkable($j, $month)) echo 'ferrie '; else if (($
 <?php
 		}
 		if($_SESSION['guest'] == 'false')
-		  echo '<td><span class="raph btnAction modifyMember" href="#">a</span><span class="raph btnAction deleteMember" href="#">&Acirc;</span></td>';
+		  echo '<td><span class="raph btnAction modifyMember" href="#">a</span><span class="raph btnAction deleteMember" href="#">&Acirc;</span><span class="raph btnAction sort" href="#">&Igrave;</span></td>';
 ?>
 </tr>
 <?php

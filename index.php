@@ -19,6 +19,7 @@ session_start();
 <script type="text/javascript" src="js/jspdf.min.js"></script>
 <script type="text/javascript" src="js/html2canvas.js"></script>
 <script type="text/javascript" src="js/canvas2image.js"></script>
+<script type="text/javascript" src="js/jquery-sortable.js"></script>
 <script>
 $(document).ready(function()
   {
