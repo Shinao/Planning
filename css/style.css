@@ -658,16 +658,19 @@ button.negative:active{
   height: 29px;
 }
 
-#planning #text .planningTable .btnAction.modifyMember
+#planning #text .planningTable tr.rowTablePlanning td.nameMember
 {
-  margin-left: -4px; margin-top: -1px;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #planning #text #datePlanning
 {
   display: inline-block;
   height: 25px;
-  margin-left: 270px;
+  margin-left: 234px;
   color: #898989;
   font-family: 'Verdana',sans-serif;
   font-size: 12px;
@@ -682,25 +685,13 @@ button.negative:active{
   box-shadow: none;
   color: #AAAAAA;
   font-size: 18px;
-  height: 22px;
-  line-height: 12px;
-  margin: -4px -4px -4px 0;
   background: url("../img/buttongray_bg.png") repeat-x scroll 0 0 #EBEBEB;
-  display: inline-block;
-  /* font-weight: bold; */
-  padding: 0 12px;
-  padding-top: 10px;
+  padding: 7px 12px;
   text-decoration: none;
   text-shadow: 0 1px 0 #FFFFFF;
   /* font-family: "Tahoma",sans-serif; */
   /* text-transform: uppercase; */
   cursor: pointer;
-}
-
-#planning #text .planningTable .btnAction.sort
-{
-  padding: 0 10px;
-  padding-top: 10px;
 }
 
 #planning #text .planningTable
@@ -757,7 +748,7 @@ button.negative:active{
 
 #planning #text td.actionMemberTitle
 {
-  width: 120px;
+  width: 100px;
   height: 10px;
 }
 

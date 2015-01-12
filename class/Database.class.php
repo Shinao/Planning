@@ -16,11 +16,11 @@ class Database
 
   public function __construct()
   {
-    $PARAM_hote = 'sql.olympe.in';
+    $PARAM_hote = '127.0.0.1';
     $PARAM_port = '3306';
-    $PARAM_nom_bd = 'hZFOFdwI';
-    $PARAM_utilisateur = 'hZFOFdwI';
-    $PARAM_mot_passe = 'showtime';
+    $PARAM_nom_bd = 'planning';
+    $PARAM_utilisateur = 'root';
+    $PARAM_mot_passe = '';
 
     try
     {
