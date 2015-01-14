@@ -69,9 +69,9 @@ if(isset($_SESSION['currentPlanningId']) && $_SESSION['currentPlanningId'] != -1
 		<div id="displayContentContainer">
 			<?php isset($_SESSION['idUser']) ? include 'php/frmPlanning.php' : include 'php/frmWelcolm.php'; ?>
 		</div>
-	    <div id="footer">
-		   <p id="copyright">Copyright © 2011-2012 - Raphaël MONNERAT - Aucun droits réservés</p>
-	    </div>
+	    <!-- <div id="footer"> -->
+		   <!-- <p id="copyright">Copyright © 2011&#45;2012 &#45; Raphaël MONNERAT &#45; Aucun droits réservés</p> -->
+	    <!-- </div> -->
 	</div>
 	<div id="javascriptError">
 	    <div id="title">Erreur</div>

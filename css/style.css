@@ -66,10 +66,10 @@ div.blockMsg {
   position: relative;
 }
 
-body{
+body {
   margin:0;
   padding:0;
-  background:url(../img/nuages.jpg) left top repeat-x #fff;
+  background:url(../img/nuages.jpg) left top repeat #fff;
 }
 
 #page{
@@ -181,44 +181,46 @@ body{
   width: 100px;
 }
 
-#header #frmLogin input, label{
+#header #frmLogin input, label {
   margin-left: 10px;
 }
 
-#header #frmLogin .inputFrm{
+#header #frmLogin .inputFrm {
   border: 2px solid white;
 }
 
-#header #frmLogin .inputFrm:focus{
+#header #frmLogin .inputFrm:focus {
   background-color: #F6F6F6;
 }
 
-#header form{
+#header form {
   margin-top: 12px;
 }
 
-#navbar{
+#navbar {
   /* margin-top: 8%; */
   /* background: url("../img/nav_bg.png") repeat scroll 0 0 transparent; */
   background-color: #2D2C2B;
   float: right;
-  height: calc(100vh - 98px);
+  height: calc(100vh - 68px);
+  /* height: calc(100vh - 98px); */
   width: 200px;
   text-align: center;
   display: none;
-  padding-bottom: 8px;
+  padding-top: 16px;
   /* border-radius: 8px 0 0 8px; */
+  border-bottom: 2px solid #F3A01E;
 }
 
-#navbar ul{
+#navbar ul {
   padding: 0;
   list-style: none outside none;
 }
 
-#navbar ul li{
+#navbar ul li {
   display: block;
   line-height: 8px;
-  padding: 8px 0;
+  padding: 12px 0;
   text-align: center;
   text-decoration: none;
   -moz-transition: color 0.2s linear 0s;
@@ -340,6 +342,7 @@ body{
 #displayContentContainer #planning{
   position: absolute;
   min-width: 60%;
+  max-width: 60%;
   margin-top: 6%;
   margin-left: 20%;
   margin-right: 20%;
