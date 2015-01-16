@@ -8,11 +8,11 @@ $(document).ready(function()
   loadPlannings();
 
   $('#modifyPass').on('click', function()
-    {
-      loadDialog('dialogModifyPass');
-    });
+{
+  loadDialog('dialogModifyPass');
+});
 
-  $('#btnDisconnect').click(function()
+$('#btnDisconnect').click(function()
 {
   $.get('api/logout.php', function()
 {
@@ -69,10 +69,19 @@ $(document).delegate('#planning #text .planningTable td.dayField', 'mouseleave',
   $(this).css('background-color', attr);
 });
 
+$(document).delegate('#planning #text .planningTable', 'mouseenter', function(evt)
+  {
+    $("#planning #text div.dayDescription").each(function() { $(this).hide(); });
+  });
+$(document).delegate('#planning #text .planningTable', 'mouseleave', function(evt)
+  {
+    $("#planning #text div.dayDescription").each(function() { $(this).show(); });
+  });
+
 $(document).delegate('#planning #text .planningTable td.dayField', 'click', function(evt)
   {
     var legend = $('#planning .legendPlanningItem.focused');
-    if (legend.length == 0 || legend.attr('data-id') < -1)
+    if (legend.length == 0 || legend.attr('data-id') < -5)
     {
       displayPopup("error", "Type de label invalide");
       return ;
@@ -85,14 +94,21 @@ $(document).delegate('#planning #text .planningTable td.dayField', 'click', func
     {
       $.get('api/delLabel.php?year='+year+'&month='+month+'&member='+$(this).parent().children().eq(0).text()+'&day='+$(this).attr('data-number'), function(data)
     {
-      var racine = data.firstChild;
-      if (racine.nodeName == "success")
-      {
-	itemDay.css('background-color', itemDay.attr('data-colordefault')).removeAttr('data-colordefault').removeAttr('data-colorlabel');
-      }
-      else if (racine.nodeName == "error")
-	displayPopup("error", racine.firstChild.nodeValue);
-    });
+ 	    var racine = data.firstChild;
+ 	    if (racine.nodeName == "success")
+ 	    {
+ 	      itemDay.css('background-color', itemDay.attr('data-colordefault')).removeAttr('data-colordefault').removeAttr('data-colorlabel');
+ 	    }
+ 	    else if (racine.nodeName == "error")
+ 	      displayPopup("error", racine.firstChild.nodeValue);
+ 	  });
+ 	    return ;
+    }
+    // Description
+    if (legend.attr('data-id') == -2)
+    {
+      dayClicked = itemDay;
+      loadDialog('dialogAddDescription');
       return ;
     }
 

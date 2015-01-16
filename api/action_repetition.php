@@ -80,8 +80,8 @@ if (isset($_SESSION['idUser'])) {
 	// Check special exception
 	// Empty - WE - Ferie
 	if (($e[0] == -1 && !$is_set) ||
-	($e[0] == -2 && ($fex_date['wday'] == 0 || $fex_date['wday'] == 6)) ||
-	($e[0] == -3 && isNotWorkable($fex_date['mday'], $fex_date['mon'])) ||
+	($e[0] == -6 && ($fex_date['wday'] == 0 || $fex_date['wday'] == 6)) ||
+	($e[0] == -7 && isNotWorkable($fex_date['mday'], $fex_date['mon'])) ||
 	($is_set && $label == $e[0]))
 	{
 	  // Warning
