@@ -98,6 +98,9 @@ $(document).delegate('#planning #text .planningTable td.dayField', 'click', func
  	    if (racine.nodeName == "success")
  	    {
  	      itemDay.css('background-color', itemDay.attr('data-colordefault')).removeAttr('data-colordefault').removeAttr('data-colorlabel');
+
+	      // Remove description
+	    $("#planning div.dayDescription[data-mpos="+itemDay.parent().index()+"][data-mday="+itemDay.index()+"]").remove();
  	    }
  	    else if (racine.nodeName == "error")
  	      displayPopup("error", racine.firstChild.nodeValue);
@@ -118,13 +121,16 @@ $(document).delegate('#planning #text .planningTable td.dayField', 'click', func
     // Add
     $.get('api/addLabel.php?member='+itemDay.parent().children().eq(0).text() + 
       '&day='+itemDay.attr('data-number') + '&year='+year+'&month='+month+
-      '&comment=none&color='+$('.legendPlanningItem.focused').data('id'), function(data)
+      '&comment=&color='+$('.legendPlanningItem.focused').data('id'), function(data)
       {
 	var racine = data.firstChild;
 	if (racine.nodeName == "success")
 	{
 	  itemDay.attr('data-colordefault', itemDay.css('background-color')).attr('data-colorlabel', $(".legendPlanningItem.focused").children().eq(2).
 	    css('background-color')).css('background-color', itemDay.attr('data-colorlabel'));
+
+	      // Remove description
+	    $("#planning div.dayDescription[data-mpos="+itemDay.parent().index()+"][data-mday="+itemDay.index()+"]").remove();
 	}
 	else if (racine.nodeName == "error")
 	{

@@ -841,6 +841,10 @@ span.itemLegendColor
 #planning #text div.dayDescription
 {
   display:none;
+  text-shadow: rgb(255, 255, 255) 0px 0px 2px;
+  color: #000000;
+  font-weight: bold;
+  /* font-size: 12px; */
 }
 
 #planning #text .ferrie
