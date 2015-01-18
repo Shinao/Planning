@@ -109,19 +109,7 @@ function loadPlanning()
   $('span.btnImportExport').on('click', function() { loadDialog('dialogImportExport'); });
   // $('span.btnPrint').on('click', function() { window.print(); });
 
-  $("#planning #text div.dayDescription").each(function()
-      {
-	var dayField = $("#planning #text tr.rowTablePlanning").eq($(this).data('mpos') + 2).children().eq($(this).data('mday'));
-	console.log(dayField);
-	var pos = dayField.position();
-
-	//show the menu directly over the placeholder
-	$(this).css({
-	  position: "absolute",
-	  top: pos.top + dayField.height() / 8 + "px",
-	  left: (pos.left) + 4 + "px",
-	}).show();
-      });
+  placeDescriptions();
 
   $('#planning .planningTable').sortable({
     containerSelector: 'table',
@@ -133,22 +121,36 @@ function loadPlanning()
       $item.removeClass("dragged").removeAttr("style");
       $("body").removeClass("dragging");
 
-      console.log(index_start_sort);
-      console.log($item.index());
-
       if (index_start_sort != $item.index())
     $.get('api/sortMember.php?name='+$item.children().eq(0).html()+'&oldindex='+index_start_sort+'&newindex='+$item.index());
     },
     onDragStart: function ($item, container, _super, event) {
-	$item.css({
-	  height: $item.height(),
-	width: $item.width()
-	})
-	$item.addClass("dragged")
-	  $("body").addClass("dragging")
-	  index_start_sort = $item.index();
-	 }
+		   $item.css({
+		     height: $item.height(),
+		   width: $item.width()
+		   })
+		   $item.addClass("dragged")
+    $("body").addClass("dragging")
+    index_start_sort = $item.index();
+		 }
   });
+      });
+}
+
+function placeDescriptions()
+{
+  $("#planning #text div.dayDescription").each(function()
+      {
+	var dayField = $("#planning #text tr.rowTablePlanning").eq($(this).data('mpos') + 2).children().eq($(this).data('mday'));
+	console.log(dayField);
+	var pos = dayField.position();
+
+	//show the menu directly over the placeholder
+	$(this).css({
+	  position: "absolute",
+	  top: pos.top + dayField.height() / 5 + "px",
+	  left: (pos.left) + 4 + "px",
+	}).show();
       });
 }
 
@@ -200,6 +202,8 @@ function generateImage()
   var legendFocused = $(".legendPlanningItem.focused");
   legendFocused.removeClass('focused');
 
+  placeDescriptions();
+
   html2canvas($("#planning"), {
     onrendered: function(canvas) {
 		  // canvas is the final rendered <canvas> element
@@ -224,6 +228,8 @@ function generatePDF()
   var legendFocused = $(".legendPlanningItem.focused");
   legendFocused.removeClass('focused');
 
+  placeDescriptions();
+
   html2canvas($("#planning"), {
     onrendered: function(canvas) {
 		  // canvas is the final rendered <canvas> element
@@ -240,6 +246,8 @@ function generatePDF()
   $(".navig, .btnTool, .btnAction").css('visibility', 'visible');
   $(".rowTablePlanning td:last-child").css('display', 'table-cell');
   legendFocused.addClass('focused');
+
+  placeDescriptions();
 		}
   });
 }
