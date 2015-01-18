@@ -135,7 +135,7 @@ class Database
 
   public function getMembersByPlanning()
   {
-    $query = $this->db->prepare("SELECT members.name FROM plannings, members WHERE members.idPlanning = plannings.id AND plannings.id = ? ORDER BY members.sort");
+    $query = $this->db->prepare("SELECT members.name, members.sort FROM plannings, members WHERE members.idPlanning = plannings.id AND plannings.id = ? ORDER BY members.sort");
 
     if (!$query->execute(array($_SESSION['currentPlanningId'])))
       return false;
@@ -228,12 +228,15 @@ class Database
 
   public function getLabels($month, $year)
   {
-    $query = $this->db->prepare("SELECT members.name, idDay, color FROM members, labels, types WHERE types.id = labels.idType AND labels.idMember = members.id AND idYear = ? AND idMonth = ? AND members.idPlanning = ?");
+    $query = $this->db->prepare("SELECT members.name, idDay, color, description FROM members, labels, types WHERE types.id = labels.idType AND labels.idMember = members.id AND idYear = ? AND idMonth = ? AND members.idPlanning = ?");
     $query->execute(array($year, $month, $_SESSION['currentPlanningId']));
 
     if ($query->rowCount() > 0)
       while($row = $query->fetch())
-	$result[$row['name']][$row['idDay']] = $row['color'];
+      {
+	$result[$row['name']][$row['idDay']]['color'] = $row['color'];
+	$result[$row['name']][$row['idDay']]['desc'] = $row['description'];
+      }
     else
       $result['return'] = "null";
 
@@ -287,6 +290,21 @@ class Database
     $query = $this->db->prepare("DELETE FROM labels WHERE idMember = ? AND idYear = ? AND idMonth = ? AND idDay = ? AND idPlanning = ?");
 
     $query->execute(array($idMember['id'], $year, $month, $day, $_SESSION['currentPlanningId']));
+
+    return $query->rowCount();
+  }
+
+  public function addDescription($desc, $member, $day, $month, $year)
+  {
+    $this->planningUpdated();
+
+    $queryIdMember = $this->db->prepare("SELECT id FROM members WHERE name = ? AND idPlanning = ?");
+    $queryIdMember->execute(array($member, $_SESSION['currentPlanningId']));
+    $idMember = $queryIdMember->fetch();
+
+    $query = $this->db->prepare("UPDATE labels SET description = ? WHERE idMember = ? AND idYear = ? AND idMonth = ? AND idDay = ? AND idPlanning = ?");
+
+    $query->execute(array($desc, $idMember['id'], $year, $month, $day, $_SESSION['currentPlanningId']));
 
     return $query->rowCount();
   }

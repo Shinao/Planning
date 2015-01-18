@@ -838,9 +838,9 @@ span.itemLegendColor
   margin-bottom: 8px;
 }
 
-div.dayDescription
+#planning #text div.dayDescription
 {
-  display:block;
+  display:none;
 }
 
 #planning #text .ferrie

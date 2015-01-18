@@ -109,7 +109,21 @@ function loadPlanning()
   $('span.btnImportExport').on('click', function() { loadDialog('dialogImportExport'); });
   // $('span.btnPrint').on('click', function() { window.print(); });
 
-  $('.planningTable').sortable({
+  $("#planning #text div.dayDescription").each(function()
+      {
+	var dayField = $("#planning #text tr.rowTablePlanning").eq($(this).data('mpos') + 2).children().eq($(this).data('mday'));
+	console.log(dayField);
+	var pos = dayField.position();
+
+	//show the menu directly over the placeholder
+	$(this).css({
+	  position: "absolute",
+	  top: pos.top + dayField.height() / 8 + "px",
+	  left: (pos.left) + 4 + "px",
+	}).show();
+      });
+
+  $('#planning .planningTable').sortable({
     containerSelector: 'table',
     itemPath: '> tbody',
     itemSelector: 'tr',

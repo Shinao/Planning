@@ -107,6 +107,9 @@ $(document).delegate('#planning #text .planningTable td.dayField', 'click', func
     // Description
     if (legend.attr('data-id') == -2)
     {
+      if (!$(this).attr('data-colorlabel'))
+	return;
+	  
       dayClicked = itemDay;
       loadDialog('dialogAddDescription');
       return ;

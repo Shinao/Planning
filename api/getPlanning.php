@@ -18,6 +18,7 @@ if (isset($_SESSION['idUser'])){
 
   $info = $db->getInfoPlanning();
   $result = $db->getMembersByPlanning();
+  $descriptions = "";
 
   $month = $_REQUEST['month'];
   $year = $_REQUEST['year'];
@@ -93,8 +94,16 @@ if (isset($_SESSION['idUser'])){
 		for ($j = 1;$j < $nbDays+1;$j++)
 		{
 ?>
-<td data-number="<?php echo $j."\""; if(isset($arrayLabel[$member['name']][$j])) { echo 'data-colorlabel=\''.$arrayLabel[$member['name']][$j].'\''; } ?> 
-class="dayField <?php if (isNotWorkable($j, $month)) echo 'ferrie '; else if (($iDay % 7) > 4) echo 'we'; ++$iDay; ?>"></td>
+  <td data-number="<?php
+echo $j."\"";
+if (isset($arrayLabel[$member['name']][$j]))
+{ 
+$label = $arrayLabel[$member['name']][$j];
+  echo 'data-colorlabel=\''. $label['color'] .'\'';
+  if ($label['desc'] != "")
+    $descriptions = $descriptions . '<div class="dayDescription" data-mday="'. $j .'" data-mpos="'. $member['sort'] .'">'. $label['desc'] .'</div>';
+}
+?> class="dayField <?php if (isNotWorkable($j, $month)) echo 'ferrie '; else if (($iDay % 7) > 4) echo 'we'; ++$iDay; ?>"></td>
 
 <?php
 		}
@@ -113,7 +122,9 @@ class="dayField <?php if (isNotWorkable($j, $month)) echo 'ferrie '; else if (($
 	      echo '<span class="btnTool btnAddMember"><img class="resizedImgPlanning" src="img/user_add_32.png"/>Ajouter</span>';
 	      echo '<span class="btnTool btnImportExport" enable="disable"><img class="resizedImgPlanning" src="img/import.png"/>Importer/Exporter</span>';
 	    }
-	    ?><span class="btnTool btnImage" enable="disable"><img class="resizedImgPlanning" src="img/imageicon.png"/>IMAGE</span><span class="btnTool btnPDF" enable="disable"><img class="resizedImgPlanning" src="img/pdficon.png"/>PDF</span></div></div><?php
+	    ?><span class="btnTool btnImage" enable="disable"><img class="resizedImgPlanning" src="img/imageicon.png"/>IMAGE</span><span class="btnTool btnPDF" enable="disable"><img class="resizedImgPlanning" src="img/pdficon.png"/>PDF</span></div><?php
+	      echo $descriptions;
+	    ?></div><?php
     // <span class="btnTool btnPrint"><img class="resizedImgPlanning" src="img/iconprint.png"/>Imprimer</span>
 }
 ?>
