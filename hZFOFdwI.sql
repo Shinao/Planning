@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.2
+-- version 4.4.4
 -- http://www.phpmyadmin.net
 --
--- Host: sql
--- Generation Time: Sep 02, 2012 at 09:02 PM
--- Server version: 5.5.24-4
--- PHP Version: 5.4.4-2
+-- Host: sql1.olympe.in
+-- Generation Time: May 06, 2015 at 01:58 PM
+-- Server version: 5.5.41-MariaDB-1ubuntu0.14.10.1
+-- PHP Version: 5.5.3-1ubuntu2.1
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -27,118 +27,133 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `labels` (
-  `id` int(25) NOT NULL AUTO_INCREMENT,
+  `id` int(25) NOT NULL,
   `description` varchar(25) NOT NULL,
   `idType` int(25) NOT NULL,
   `idMember` int(25) NOT NULL,
   `idMonth` int(25) NOT NULL,
   `idDay` int(25) NOT NULL,
   `idYear` int(25) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=107 ;
+  `idPlanning` int(15) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=3045 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `labels`
 --
 
-INSERT INTO `labels` (`id`, `description`, `idType`, `idMember`, `idMonth`, `idDay`, `idYear`) VALUES
-(20, '', 3, 36, 6, 7, 2012),
-(16, '', 3, 36, 6, 6, 2012),
-(19, '', 3, 36, 6, 10, 2012),
-(18, '', 3, 36, 6, 8, 2012),
-(17, '', 3, 36, 6, 11, 2012),
-(21, '', 3, 36, 6, 9, 2012),
-(7, '', 4, 39, 6, 8, 2012),
-(8, '', 4, 39, 6, 9, 2012),
-(9, '', 4, 39, 6, 10, 2012),
-(10, '', 4, 39, 6, 11, 2012),
-(24, '', 3, 40, 6, 21, 2012),
-(23, '', 3, 40, 6, 20, 2012),
-(22, '', 3, 40, 6, 19, 2012),
-(14, '', 2, 38, 6, 24, 2012),
-(15, '', 2, 37, 6, 24, 2012),
-(25, '', 3, 40, 6, 22, 2012),
-(26, '', 4, 39, 6, 16, 2012),
-(27, '', 4, 39, 6, 18, 2012),
-(28, '', 4, 39, 6, 17, 2012),
-(29, '', 4, 39, 6, 19, 2012),
-(30, '', 1, 39, 6, 1, 2012),
-(31, '', 1, 38, 6, 19, 2012),
-(32, '', 1, 40, 6, 29, 2012),
-(33, '', 1, 38, 6, 3, 2012),
-(34, '', 1, 36, 6, 27, 2012),
-(35, '', 1, 36, 6, 12, 2012),
-(36, '', 1, 39, 6, 24, 2012),
-(37, '', 1, 40, 6, 8, 2012),
-(38, '', 1, 37, 6, 12, 2012),
-(39, '', 1, 37, 6, 30, 2012),
-(40, '', 5, 33, 6, 6, 2012),
-(41, '', 5, 33, 6, 2, 2012),
-(42, '', 5, 33, 6, 8, 2012),
-(43, '', 5, 33, 6, 4, 2012),
-(44, '', 5, 33, 6, 3, 2012),
-(45, '', 5, 33, 6, 7, 2012),
-(46, '', 5, 33, 6, 10, 2012),
-(47, '', 5, 33, 6, 11, 2012),
-(48, '', 5, 33, 6, 12, 2012),
-(49, '', 5, 33, 6, 14, 2012),
-(50, '', 5, 33, 6, 15, 2012),
-(51, '', 5, 33, 6, 16, 2012),
-(52, '', 5, 32, 6, 3, 2012),
-(53, '', 5, 32, 6, 6, 2012),
-(54, '', 5, 32, 6, 10, 2012),
-(55, '', 5, 32, 6, 15, 2012),
-(56, '', 5, 31, 6, 3, 2012),
-(57, '', 5, 31, 6, 6, 2012),
-(58, '', 5, 31, 6, 7, 2012),
-(59, '', 5, 31, 6, 8, 2012),
-(60, '', 5, 31, 6, 10, 2012),
-(61, '', 5, 31, 6, 11, 2012),
-(62, '', 5, 31, 6, 12, 2012),
-(63, '', 5, 31, 6, 15, 2012),
-(64, '', 5, 34, 6, 3, 2012),
-(65, '', 5, 34, 6, 6, 2012),
-(66, '', 5, 34, 6, 12, 2012),
-(67, '', 5, 34, 6, 15, 2012),
-(68, '', 5, 35, 6, 3, 2012),
-(69, '', 5, 35, 6, 6, 2012),
-(70, '', 5, 35, 6, 7, 2012),
-(71, '', 5, 35, 6, 8, 2012),
-(72, '', 5, 35, 6, 10, 2012),
-(73, '', 5, 35, 6, 11, 2012),
-(74, '', 5, 35, 6, 12, 2012),
-(75, '', 5, 35, 6, 15, 2012),
-(76, '', 6, 33, 6, 20, 2012),
-(77, '', 6, 33, 6, 22, 2012),
-(78, '', 6, 33, 6, 21, 2012),
-(79, '', 6, 33, 6, 24, 2012),
-(80, '', 6, 33, 6, 27, 2012),
-(81, '', 6, 32, 6, 22, 2012),
-(82, '', 6, 32, 6, 20, 2012),
-(83, '', 6, 32, 6, 24, 2012),
-(84, '', 6, 32, 6, 26, 2012),
-(85, '', 6, 31, 6, 20, 2012),
-(86, '', 6, 31, 6, 22, 2012),
-(87, '', 6, 31, 6, 24, 2012),
-(88, '', 6, 31, 6, 25, 2012),
-(89, '', 6, 34, 6, 20, 2012),
-(90, '', 6, 34, 6, 22, 2012),
-(91, '', 6, 34, 6, 24, 2012),
-(92, '', 6, 34, 6, 26, 2012),
-(93, '', 6, 35, 6, 20, 2012),
-(94, '', 6, 35, 6, 21, 2012),
-(95, '', 6, 35, 6, 22, 2012),
-(96, '', 6, 35, 6, 24, 2012),
-(97, '', 6, 35, 6, 27, 2012),
-(98, '', 6, 31, 7, 11, 2012),
-(99, '', 6, 31, 7, 20, 2012),
-(100, '', 6, 34, 7, 16, 2012),
-(101, '', 6, 34, 7, 23, 2012),
-(102, '', 6, 35, 7, 15, 2012),
-(103, '', 6, 31, 7, 18, 2012),
-(104, '', 6, 32, 7, 11, 2012),
-(105, '', 6, 31, 7, 22, 2012),
-(106, '', 6, 35, 7, 14, 2012);
+INSERT INTO `labels` (`id`, `description`, `idType`, `idMember`, `idMonth`, `idDay`, `idYear`, `idPlanning`) VALUES
+(3004, '', 202, 358, 1, 21, 2015, 23),
+(3003, '', 202, 352, 1, 16, 2015, 23),
+(3002, '', 202, 355, 1, 12, 2015, 23),
+(3001, '', 202, 355, 1, 20, 2015, 23),
+(3000, '', 202, 359, 1, 25, 2015, 23),
+(189, '', 189, 340, 12, 16, 2014, 21),
+(2946, '', 189, 340, 1, 16, 2014, 21),
+(2947, 'none', 194, 348, 12, 8, 2014, 22),
+(2948, 'none', 194, 348, 12, 11, 2014, 22),
+(2949, 'none', 194, 348, 12, 13, 2014, 22),
+(2953, '', 199, 354, 12, 16, 2014, 23),
+(2954, '', 199, 354, 1, 16, 2014, 23),
+(2955, '', 201, 352, 12, 10, 2014, 23),
+(2956, '', 198, 359, 12, 10, 2014, 23),
+(2957, '', 203, 354, 12, 11, 2014, 23),
+(2958, '', 199, 353, 12, 18, 2014, 23),
+(2959, '', 198, 353, 12, 10, 2014, 23),
+(2960, '', 199, 354, 12, 18, 2014, 23),
+(2961, '', 200, 356, 12, 17, 2014, 23),
+(2962, '', 203, 354, 12, 9, 2014, 23),
+(2963, '', 203, 356, 12, 11, 2014, 23),
+(2964, '', 202, 352, 12, 17, 2014, 23),
+(2965, '', 201, 351, 12, 10, 2014, 23),
+(2966, '', 199, 354, 12, 17, 2014, 23),
+(2967, '', 202, 357, 12, 17, 2014, 23),
+(2968, '', 199, 354, 12, 19, 2014, 23),
+(2969, '', 199, 356, 12, 19, 2014, 23),
+(2970, '', 199, 353, 12, 19, 2014, 23),
+(2971, '', 202, 351, 12, 19, 2014, 23),
+(2972, '', 199, 353, 12, 17, 2014, 23),
+(2973, '', 199, 353, 12, 16, 2014, 23),
+(2974, '', 199, 356, 12, 16, 2014, 23),
+(2975, '', 202, 357, 12, 14, 2014, 23),
+(2976, '', 201, 357, 12, 12, 2014, 23),
+(2977, '', 201, 357, 12, 10, 2014, 23),
+(2978, '', 203, 356, 12, 9, 2014, 23),
+(2979, '', 203, 356, 12, 10, 2014, 23),
+(2980, '', 203, 354, 12, 10, 2014, 23),
+(2981, '', 202, 357, 12, 18, 2014, 23),
+(2982, '', 202, 351, 12, 17, 2014, 23),
+(2983, '', 202, 351, 12, 18, 2014, 23),
+(2984, '', 202, 357, 12, 19, 2014, 23),
+(2985, '', 202, 355, 12, 18, 2014, 23),
+(2986, '', 202, 355, 12, 17, 2014, 23),
+(2987, '', 202, 359, 12, 17, 2014, 23),
+(2988, '', 202, 357, 12, 16, 2014, 23),
+(2989, '', 202, 357, 12, 15, 2014, 23),
+(2990, '', 202, 359, 12, 18, 2014, 23),
+(2991, '', 202, 357, 12, 13, 2014, 23),
+(2992, '', 202, 352, 12, 18, 2014, 23),
+(2993, '', 201, 357, 12, 11, 2014, 23),
+(2994, '', 201, 352, 12, 11, 2014, 23),
+(2995, '', 201, 352, 12, 12, 2014, 23),
+(2996, '', 201, 351, 12, 11, 2014, 23),
+(2997, '', 201, 351, 12, 12, 2014, 23),
+(2998, '', 200, 356, 12, 18, 2014, 23),
+(2999, '', 202, 357, 1, 29, 2015, 23),
+(2944, '', 191, 343, 12, 10, 2014, 21),
+(2943, '', 188, 346, 12, 10, 2014, 21),
+(2942, '', 193, 340, 12, 11, 2014, 21),
+(2941, '', 189, 342, 12, 18, 2014, 21),
+(2940, '', 188, 342, 12, 10, 2014, 21),
+(2939, '', 189, 340, 12, 18, 2014, 21),
+(2938, '', 190, 341, 12, 17, 2014, 21),
+(2937, '', 193, 340, 12, 9, 2014, 21),
+(2936, '', 193, 341, 12, 11, 2014, 21),
+(2935, '', 192, 343, 12, 17, 2014, 21),
+(2934, '', 191, 345, 12, 10, 2014, 21),
+(2933, '', 189, 340, 12, 17, 2014, 21),
+(2932, '', 192, 344, 12, 17, 2014, 21),
+(2931, '', 189, 340, 12, 19, 2014, 21),
+(2930, '', 189, 341, 12, 19, 2014, 21),
+(2929, '', 189, 342, 12, 19, 2014, 21),
+(2928, '', 192, 345, 12, 19, 2014, 21),
+(2927, '', 189, 342, 12, 17, 2014, 21),
+(2926, '', 189, 342, 12, 16, 2014, 21),
+(2925, '', 189, 341, 12, 16, 2014, 21),
+(2924, '', 192, 344, 12, 14, 2014, 21),
+(2923, '', 191, 344, 12, 12, 2014, 21),
+(2922, '', 191, 344, 12, 10, 2014, 21),
+(2921, '', 193, 341, 12, 9, 2014, 21),
+(2920, '', 193, 341, 12, 10, 2014, 21),
+(2919, '', 193, 340, 12, 10, 2014, 21),
+(2918, '', 192, 344, 12, 18, 2014, 21),
+(2917, '', 192, 345, 12, 17, 2014, 21),
+(2916, '', 192, 345, 12, 18, 2014, 21),
+(2915, '', 192, 344, 12, 19, 2014, 21),
+(2914, '', 192, 347, 12, 18, 2014, 21),
+(2913, '', 192, 347, 12, 17, 2014, 21),
+(2912, '', 192, 346, 12, 17, 2014, 21),
+(2911, '', 192, 344, 12, 16, 2014, 21),
+(2910, '', 192, 344, 12, 15, 2014, 21),
+(2909, '', 192, 346, 12, 18, 2014, 21),
+(2908, '', 192, 344, 12, 13, 2014, 21),
+(2907, '', 192, 343, 12, 18, 2014, 21),
+(2906, '', 191, 344, 12, 11, 2014, 21),
+(2905, '', 191, 343, 12, 11, 2014, 21),
+(2904, '', 191, 343, 12, 12, 2014, 21),
+(2903, '', 191, 345, 12, 11, 2014, 21),
+(2902, '', 191, 345, 12, 12, 2014, 21),
+(2895, '', 190, 341, 12, 18, 2014, 21),
+(2896, '', 192, 344, 1, 29, 2015, 21),
+(2897, '', 192, 346, 1, 25, 2015, 21),
+(2898, '', 192, 347, 1, 20, 2015, 21),
+(2899, '', 192, 347, 1, 12, 2015, 21),
+(2900, '', 192, 343, 1, 16, 2015, 21),
+(2901, '', 192, 339, 1, 21, 2015, 21),
+(3040, 'none', 200, 353, 4, 16, 2015, 23),
+(3041, 'none', 200, 357, 4, 13, 2015, 23),
+(3042, 'none', 200, 354, 4, 13, 2015, 23),
+(3043, 'none', 200, 355, 4, 15, 2015, 23),
+(3044, 'none', 200, 354, 4, 14, 2015, 23);
 
 -- --------------------------------------------------------
 
@@ -147,35 +162,46 @@ INSERT INTO `labels` (`id`, `description`, `idType`, `idMember`, `idMonth`, `idD
 --
 
 CREATE TABLE IF NOT EXISTS `members` (
-  `id` int(25) NOT NULL AUTO_INCREMENT,
+  `id` int(25) NOT NULL,
   `name` varchar(25) NOT NULL,
   `idPlanning` int(25) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=55 ;
+  `sort` int(25) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=370 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `members`
 --
 
-INSERT INTO `members` (`id`, `name`, `idPlanning`) VALUES
-(33, 'Unkow3', 11),
-(32, 'Unkow2', 11),
-(31, 'Unkow', 11),
-(34, 'Unkow4', 11),
-(35, 'Unkow5', 11),
-(42, 'P.MONNERAT', 13),
-(43, 'V.SIMON', 13),
-(44, 'P.CRUEL', 13),
-(45, 'H.RANCE', 13),
-(46, 'H.NATIK', 13),
-(47, 'P.ALHERBE', 13),
-(48, 'A.LEVY', 13),
-(49, 'J.P.ARTIGAUD', 13),
-(50, 'M.NAVE', 13),
-(51, 'M.MEJAAT', 13),
-(52, 'P.MAHIEU', 13),
-(53, 'C.JUNG', 13),
-(54, 'S.CANENA', 13);
+INSERT INTO `members` (`id`, `name`, `idPlanning`, `sort`) VALUES
+(348, 'dsad', 22, 98),
+(347, 'P.MONNERAT', 21, 6),
+(346, 'E.POMMIER', 21, 8),
+(345, 'V.SIMON', 21, 0),
+(344, 'B.CHATIR', 21, 5),
+(343, 'D.BANCE', 21, 1),
+(342, 'S.MONOT', 21, 3),
+(341, 'P.CHAPON', 21, 4),
+(340, 'S.GORI', 21, 2),
+(339, 'R.DRIEUX', 21, 7),
+(351, 'V.SIMON', 23, 3),
+(352, 'D.BANCE', 23, 0),
+(353, 'S.MONOT', 23, 1),
+(354, 'S.GORI', 23, 2),
+(355, 'P.MONNERAT', 23, 4),
+(356, 'P.CHAPON', 23, 5),
+(357, 'B.CHATIR', 23, 6),
+(358, 'R.DRIEUX', 23, 7),
+(359, 'E.POMMIER', 23, 8),
+(360, 'dwe', 21, 9),
+(361, 'dweewqe', 21, 10),
+(362, 'dweewqee', 21, 11),
+(363, 'dweewqeeqwe', 21, 12),
+(364, 'dweewqeeqweewqe', 21, 13),
+(365, 'dweewqeeqweewqeewqe', 21, 14),
+(366, 'dweewqeeqweewqeewqeewqe', 21, 15),
+(367, 'dweewqeeqweewqeewqeewqeew', 21, 16),
+(368, 'dweewqeeqweewqeewqeewqeew', 21, 17),
+(369, 'aaa', 21, 18);
 
 -- --------------------------------------------------------
 
@@ -184,21 +210,21 @@ INSERT INTO `members` (`id`, `name`, `idPlanning`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `plannings` (
-  `id` int(25) NOT NULL AUTO_INCREMENT,
+  `id` int(25) NOT NULL,
   `date` date NOT NULL,
   `idUser` int(25) NOT NULL,
   `name` varchar(25) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+  `message` varchar(500) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `plannings`
 --
 
-INSERT INTO `plannings` (`id`, `date`, `idUser`, `name`) VALUES
-(11, '2012-05-30', 1, 'TryPlan2'),
-(10, '2012-05-30', 1, 'PlanningTest'),
-(13, '2012-06-08', 1, '2012/2013');
+INSERT INTO `plannings` (`id`, `date`, `idUser`, `name`, `message`) VALUES
+(23, '2015-04-09', 1, 'ewqe', ''),
+(22, '2014-12-30', 1, 'test', ''),
+(21, '2015-01-04', 1, 'nouvelle equipe', '');
 
 -- --------------------------------------------------------
 
@@ -207,32 +233,33 @@ INSERT INTO `plannings` (`id`, `date`, `idUser`, `name`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `types` (
-  `id` int(25) NOT NULL AUTO_INCREMENT,
-  `name` varchar(25) NOT NULL,
+  `id` int(25) NOT NULL,
+  `name` varchar(25) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `color` varchar(25) NOT NULL,
-  `idPlanning` int(25) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+  `idPlanning` int(25) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=204 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `types`
 --
 
 INSERT INTO `types` (`id`, `name`, `color`, `idPlanning`) VALUES
-(1, 'RTT', '#e09419', 10),
-(2, 'PONT', '#5c3c3c', 10),
-(3, 'CONGE', '#4782d9', 10),
-(4, 'FORMATION', '#56b337', 10),
-(5, '01', '#2b83c2', 11),
-(6, '02', '#d12a2a', 11),
-(16, 'AT', '#ed0c0c', 13),
-(17, 'maladie', '#e89212', 13),
-(10, 'RTT', '#ede739', 13),
-(11, 'recup samedi', '#23eded', 13),
-(12, 'congé', '#d121e8', 13),
-(13, 'congé autre', '#3d28de', 13),
-(14, 'formation', '#35e82e', 13),
-(15, 'DJF', '#0a070a', 13);
+(198, 'RTT', '#ecf711', 23),
+(199, 'Recup samedi', '#2b5c51', 23),
+(200, 'Conges', '#00ff15', 23),
+(201, 'Formation', '#0F1EF7', 23),
+(202, 'Permanence', '#010212', 23),
+(203, 'maladie', '#ED093E', 23),
+(197, 'FORMATION', '#56b337', 22),
+(196, 'CONGE', '#4782d9', 22),
+(195, 'PONT', '#5c3c3c', 22),
+(194, 'RTT', '#e09419', 22),
+(188, 'RTT', '#ecf711', 21),
+(189, 'Recup samedi', '#2b5c51', 21),
+(190, 'Conges', '#00ff15', 21),
+(191, 'Formation', '#0F1EF7', 21),
+(192, 'Permanence', '#010212', 21),
+(193, 'maladie', '#ED093E', 21);
 
 -- --------------------------------------------------------
 
@@ -241,12 +268,11 @@ INSERT INTO `types` (`id`, `name`, `color`, `idPlanning`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `id` int(10) NOT NULL,
   `pseudo` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
-  `guestpass` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  `guestpass` varchar(50) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
@@ -255,6 +281,69 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`id`, `pseudo`, `password`, `guestpass`) VALUES
 (1, 'pascal', 'raphael', 'invite');
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `labels`
+--
+ALTER TABLE `labels`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `members`
+--
+ALTER TABLE `members`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `plannings`
+--
+ALTER TABLE `plannings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `types`
+--
+ALTER TABLE `types`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `labels`
+--
+ALTER TABLE `labels`
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3045;
+--
+-- AUTO_INCREMENT for table `members`
+--
+ALTER TABLE `members`
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=370;
+--
+-- AUTO_INCREMENT for table `plannings`
+--
+ALTER TABLE `plannings`
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
+--
+-- AUTO_INCREMENT for table `types`
+--
+ALTER TABLE `types`
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=204;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
