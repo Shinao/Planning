@@ -57,7 +57,6 @@ if(isset($_SESSION['idUser']))
 	<div id="page">
 	    <img src="img/planning.png" id="imgPlanning"/>
 	    <div id="header">
-		<img src="img/ThyssenKrupp_logo_opti.png" id="logoEnterprise"/>
 		<?php isset($_SESSION['idUser']) ? include 'php/frmMenu.php' : include 'php/frmLogin.php'; ?>
 	    </div>
 <?php
@@ -70,12 +69,12 @@ if(isset($_SESSION['currentPlanningId']) && $_SESSION['currentPlanningId'] != -1
 			<?php isset($_SESSION['idUser']) ? include 'php/frmPlanning.php' : include 'php/frmWelcolm.php'; ?>
 		</div>
 	    <!-- <div id="footer"> -->
-		   <!-- <p id="copyright">Copyright © 2011&#45;2012 &#45; Raphaël MONNERAT &#45; Aucun droits réservés</p> -->
+		   <!-- <p id="copyright">Copyright ï¿½ 2011&#45;2012 &#45; Raphaï¿½l MONNERAT &#45; Aucun droits rï¿½servï¿½s</p> -->
 	    <!-- </div> -->
 	</div>
 	<div id="javascriptError">
 	    <div id="title">Erreur</div>
-	    <div id="text">Javascript n'est pas activé, le site ne peut fonctionner correctement</div>
+	    <div id="text">Javascript n'est pas activï¿½, le site ne peut fonctionner correctement</div>
 	</div>
 <script>
 $("#javascriptError").hide();
