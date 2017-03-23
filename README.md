@@ -4,7 +4,7 @@ Planning
 Online team planning manager
 
 ### Preview
-![Preview]("/docs/planning.gif")
+![Preview](/docs/planning.gif)
 
 ### Capacities
 - Manage multiple plannings by account
